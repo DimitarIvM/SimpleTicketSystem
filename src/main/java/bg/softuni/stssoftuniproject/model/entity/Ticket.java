@@ -1,6 +1,7 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -12,16 +13,18 @@ public class Ticket  extends BaseEntity{
     private String subject;
 
     @ManyToOne
+    @NotNull
     private Client client;
 
     @ManyToOne
     private Employee ticketAssignee;
 
     @ManyToOne
+    @NotNull
     private Company company;
 
     @Column(columnDefinition = "LONGTEXT",nullable = false)
-
+@NotNull
     private String description;
 
     @Column(nullable = false)

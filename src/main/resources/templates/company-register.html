@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/companies/register}" th:method="post" th:object="${companyRegisterDTO}">
+
+    <div class="form-group">
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="name" class="h4 mb-2">Company Name </label>
+        </div>
+        <input th:field="*{name}" th:errorclass="'is-invalid alert-danger'"
+               type="text" class="form-control" id="name" name="name"/>
+        <small th:errors="*{name}"
+               th:if="${#fields.hasErrors('name')}" class="invalid-feedback text-danger">Company name error message</small>
+    </div>
+
+    <div class="form-group">
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="corporateEmail" class="h4 mb-2">Corporate Email </label>
+        </div>
+        <input th:field="*{corporateEmail}" th:errorclass="'is-invalid alert-danger'"
+               type="text" class="form-control" id="corporateEmail" name="corporateEmail"/>
+        <small th:errors="*{corporateEmail}"
+               th:if="${#fields.hasErrors('corporateEmail')}" class="invalid-feedback text-danger">Corporate Name error message</small>
+    </div>
+    <div class="button-holder d-flex justify-content-center">
+        <button type="submit" class="btn btn-warning  mb-3" value="Submit application">Submit application</button>
+    </div>
+
+</form>
+
+
+
+</body>
+</html>

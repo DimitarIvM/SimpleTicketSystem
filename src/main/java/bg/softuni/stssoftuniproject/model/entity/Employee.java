@@ -1,37 +1,46 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import org.hibernate.validator.constraints.Length;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
-public class Employee extends BaseEntity{
-    @Column(unique = true,nullable = false)
-    @Length(min = 5,max = 50)
-    private String username;
+@Table(name = "employees")
+public class Employee extends BaseEntity {
+    @Column(nullable = false)
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
 
-    @Email
-    @Column(nullable = false,unique = true)
+    @Column(unique = true,nullable = false)
     private String email;
 
     @Column(nullable = false)
     private String password;
-
     @OneToMany(mappedBy = "ticketAssignee")
     private Set<Ticket> tickets;
 
+
+    @NotNull
     @ManyToOne
+    @JoinColumn(name="company_id")
     private Company company;
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -49,6 +58,9 @@ public class Employee extends BaseEntity{
     public void setPassword(String password) {
         this.password = password;
     }
+
+
+
 
     public Set<Ticket> getTickets() {
         return tickets;

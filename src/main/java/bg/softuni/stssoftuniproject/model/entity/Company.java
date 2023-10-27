@@ -1,9 +1,6 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
 import java.util.Set;
@@ -12,7 +9,7 @@ import java.util.Set;
 @Table(name = "companies")
 public class Company extends BaseEntity {
 
-    @OneToMany(mappedBy = "company")
+   @OneToMany(mappedBy = "company",fetch = FetchType.EAGER)
     private Set<Employee> employees;
 
     @Column(unique = true,nullable = false)

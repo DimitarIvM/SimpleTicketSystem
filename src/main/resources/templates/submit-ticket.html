@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>STS</title>
+</head>
+<body>
+
+<form th:action="" th:method="post" th:object="${ticketSubmitDTO}">
+    <div class="form-group">
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="subject" class="h4 mb-2">Client </label>
+        </div>
+        <input th:field="*{client}" th:errorclass="'is-invalid alert-danger'"
+               type="text" class="form-control" id="client" name="client"/>
+        <small th:errors="*{client}"
+               th:if="${#fields.hasErrors('client')}" class="invalid-feedback text-danger">First name error message</small>
+    </div>
+
+
+    <div class="form-group">
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="subject" class="h4 mb-2">First Name </label>
+        </div>
+        <input th:field="*{subject}" th:errorclass="'is-invalid alert-danger'"
+               type="text" class="form-control" id="subject" name="subject"/>
+        <small th:errors="*{subject}"
+               th:if="${#fields.hasErrors('subject')}" class="invalid-feedback text-danger">First name error message</small>
+    </div>
+
+    <div class="form-group">
+        <div class="label-holder text-white textCol d-flex justify-content-center">
+            <label for="description" class="h4 mb-2">Last Name</label>
+        </div>
+        <textarea th:field="*{description}" th:errorclass="'is-invalid alert-danger'"
+               type="textarea" class="form-control" id="description" name="description">
+
+        </textarea>
+        <small th:errors="*{description}"
+               th:if="${#fields.hasErrors('description')}" class="invalid-feedback text-danger">Email error message</small>
+    </div>
+
+
+
+    <div class="button-holder d-flex justify-content-center">
+        <button type="submit" class="btn btn-warning  mb-3" value="Register">Submit</button>
+    </div>
+
+
+</form>
+
+</body>
+</html>

@@ -12,11 +12,11 @@ import java.util.Set;
 @Component
 public class DataInit implements CommandLineRunner {
     private PriorityService priorityService;
-    private CompanyRepository companyRepository;
 
-    public DataInit(PriorityService priorityService, CompanyRepository companyRepository) {
+
+    public DataInit(PriorityService priorityService) {
         this.priorityService = priorityService;
-        this.companyRepository = companyRepository;
+
     }
 
 

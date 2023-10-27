@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "tickets")
@@ -32,6 +33,17 @@ public class Ticket  extends BaseEntity{
 
     @Column(nullable = false)
     private LocalDateTime  modified;
+
+    public Set<Product> getProduct() {
+        return product;
+    }
+
+    public void setProduct(Set<Product> product) {
+        this.product = product;
+    }
+
+    @OneToMany(mappedBy = "ticket")
+    private Set<Product> product;
 
 
     @OneToOne

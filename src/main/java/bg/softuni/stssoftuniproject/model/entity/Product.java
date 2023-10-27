@@ -19,7 +19,20 @@ public class Product  extends BaseEntity {
     private String serialNumber;
 
     @ManyToOne
+    private Company company;
+
+    @ManyToOne
+    private Ticket ticket;
+    @ManyToOne
     private Client client;
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
+    }
 
     public Client getClient() {
         return client;
@@ -37,8 +50,7 @@ public class Product  extends BaseEntity {
         this.company = company;
     }
 
-    @ManyToOne
-    private Company company;
+
 
     public String getProductName() {
         return productName;

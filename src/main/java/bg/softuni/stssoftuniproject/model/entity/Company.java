@@ -12,6 +12,9 @@ public class Company extends BaseEntity {
    @OneToMany(mappedBy = "company",fetch = FetchType.EAGER)
     private Set<Employee> employees;
 
+   @OneToMany(mappedBy = "company")
+   private Set<Client> clients;
+
     @Column(unique = true,nullable = false)
     private String companyName;
 
@@ -24,6 +27,14 @@ public class Company extends BaseEntity {
 
     @OneToMany(mappedBy = "company")
     private Set<Ticket> tickets;
+
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
+    }
 
     public Set<Ticket> getTickets() {
         return tickets;

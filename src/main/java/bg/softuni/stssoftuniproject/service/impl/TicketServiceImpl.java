@@ -3,6 +3,7 @@ package bg.softuni.stssoftuniproject.service.impl;
 import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
 import bg.softuni.stssoftuniproject.model.entity.Ticket;
 import bg.softuni.stssoftuniproject.repository.TicketRepository;
+import bg.softuni.stssoftuniproject.service.TicketService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

@@ -27,6 +27,17 @@ public class Employee extends BaseEntity {
     @JoinColumn(name="company_id")
     private Company company;
 
+    @ManyToMany(mappedBy = "employee",fetch = FetchType.EAGER)
+    private Set<Role> roles;
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     public String getFirstName() {
         return firstName;
     }

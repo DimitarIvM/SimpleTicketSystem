@@ -1,4 +1,4 @@
-package bg.softuni.stssoftuniproject.service.impl;
+package bg.softuni.stssoftuniproject.service;
 
 import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
 

@@ -1,9 +1,6 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.util.Set;
 
@@ -23,6 +20,17 @@ public class Client extends BaseEntity{
 
     @OneToMany(mappedBy = "client")
     private Set<Ticket> tickets;
+
+    @ManyToOne
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     public String getFirstName() {
         return firstName;

@@ -25,27 +25,13 @@ public class Ticket  extends BaseEntity{
     private Company company;
 
     @Column(columnDefinition = "LONGTEXT",nullable = false)
-@NotNull
     private String description;
 
     @Column(nullable = false)
     private LocalDateTime created;
 
-    @Column(nullable = false)
+    @Column
     private LocalDateTime  modified;
-
-    public Set<Product> getProduct() {
-        return product;
-    }
-
-    public void setProduct(Set<Product> product) {
-        this.product = product;
-    }
-
-    @OneToMany(mappedBy = "ticket")
-    private Set<Product> product;
-
-
     @OneToOne
     private Priority priority;
 

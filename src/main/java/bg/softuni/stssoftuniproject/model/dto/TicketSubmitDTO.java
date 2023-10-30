@@ -1,12 +1,6 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
-import bg.softuni.stssoftuniproject.model.entity.Client;
 import bg.softuni.stssoftuniproject.model.entity.Company;
-import bg.softuni.stssoftuniproject.model.entity.Employee;
-import bg.softuni.stssoftuniproject.model.entity.Priority;
-import jakarta.persistence.Column;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 

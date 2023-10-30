@@ -25,7 +25,7 @@ public class EmployeeController {
     @GetMapping("/register")
     public ModelAndView register() {
 
-        return new ModelAndView("register");
+        return new ModelAndView("employee-register");
 
     }
 

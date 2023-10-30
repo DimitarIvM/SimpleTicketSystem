@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<form th:action="" th:method="post" th:object="${ticketSubmitDTO}">
+<form th:action="@{/ticket-submit}" th:method="post" th:object="${ticketSubmitDTO}">
     <div class="form-group">
         <div class="label-holder text-white textCol d-flex justify-content-center">
             <label for="subject" class="h4 mb-2">Client </label>
@@ -14,13 +14,13 @@
         <input th:field="*{client}" th:errorclass="'is-invalid alert-danger'"
                type="text" class="form-control" id="client" name="client"/>
         <small th:errors="*{client}"
-               th:if="${#fields.hasErrors('client')}" class="invalid-feedback text-danger">First name error message</small>
+               th:if="${#fields.hasErrors('client')}" class="invalid-feedback text-danger">Name</small>
     </div>
 
 
     <div class="form-group">
         <div class="label-holder text-white textCol d-flex justify-content-center">
-            <label for="subject" class="h4 mb-2">First Name </label>
+            <label for="subject" class="h4 mb-2">Subject</label>
         </div>
         <input th:field="*{subject}" th:errorclass="'is-invalid alert-danger'"
                type="text" class="form-control" id="subject" name="subject"/>
@@ -30,7 +30,7 @@
 
     <div class="form-group">
         <div class="label-holder text-white textCol d-flex justify-content-center">
-            <label for="description" class="h4 mb-2">Last Name</label>
+            <label for="description" class="h4 mb-2">Description</label>
         </div>
         <textarea th:field="*{description}" th:errorclass="'is-invalid alert-danger'"
                type="textarea" class="form-control" id="description" name="description">

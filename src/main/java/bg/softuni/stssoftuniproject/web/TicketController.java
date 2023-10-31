@@ -1,8 +1,10 @@
 package bg.softuni.stssoftuniproject.web;
 
+import bg.softuni.stssoftuniproject.model.dto.AllTicketsDTO;
 import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
 import bg.softuni.stssoftuniproject.model.dto.TicketViewDTO;
 import bg.softuni.stssoftuniproject.service.TicketService;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +19,21 @@ public class TicketController {
 //TODO: add product
     public TicketController(TicketService ticketService) {
         this.ticketService = ticketService;
+    }
+
+    @GetMapping("/tickets/{id}")
+    public ModelAndView getAllTickets(@PathVariable("id")Long id){
+        ModelAndView mv = new ModelAndView();
+
+        AllTicketsDTO allTicketsDTO = this.ticketService.getAllById(id);
+
+        mv.setViewName("tickets");
+
+        mv.addObject("allTickets",allTicketsDTO);
+
+        return mv;
+
+
     }
 
     @GetMapping("/ticket-submit")
@@ -37,7 +54,7 @@ public class TicketController {
     }
 
 
-    @GetMapping("ticket/{id}")
+    @GetMapping("/ticket/{id}")
 public ModelAndView viewTicket(@PathVariable("id") Long id){
 
         ModelAndView mv = new ModelAndView();

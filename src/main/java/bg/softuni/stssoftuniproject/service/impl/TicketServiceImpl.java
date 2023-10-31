@@ -1,5 +1,7 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
+import bg.softuni.stssoftuniproject.model.dto.AllTicketsDTO;
+import bg.softuni.stssoftuniproject.model.dto.TicketDTO;
 import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
 import bg.softuni.stssoftuniproject.model.dto.TicketViewDTO;
 import bg.softuni.stssoftuniproject.model.entity.Ticket;
@@ -9,6 +11,10 @@ import bg.softuni.stssoftuniproject.service.CompanyService;
 import bg.softuni.stssoftuniproject.service.TicketService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -48,5 +54,38 @@ public class TicketServiceImpl implements TicketService {
 
 
         return modelMapper.map(ticket, TicketViewDTO.class);
+    }
+
+
+
+    @Override
+    public AllTicketsDTO getAllById(Long id) {
+
+        AllTicketsDTO allTicketsDTO = new AllTicketsDTO();
+        allTicketsDTO.setTickets(getTickets(id));
+
+        return allTicketsDTO;
+
+
+
+    }
+
+    private Set<TicketDTO> getTickets(Long companyId){
+
+        Set<TicketDTO> tickets = new HashSet<>();
+
+        Set<Ticket> allByCompanyId = this.getAllByCompanyId(companyId);
+
+        for (Ticket ticket : allByCompanyId) {
+
+            tickets.add( modelMapper.map(ticket,TicketDTO.class));
+        }
+        return tickets;
+
+    }
+
+
+    private Set<Ticket> getAllByCompanyId(Long companyId) {
+        return ticketRepository.findAllByCompanyId(companyId);
     }
 }

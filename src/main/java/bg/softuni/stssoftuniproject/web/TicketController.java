@@ -1,10 +1,12 @@
 package bg.softuni.stssoftuniproject.web;
 
 import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
+import bg.softuni.stssoftuniproject.model.dto.TicketViewDTO;
 import bg.softuni.stssoftuniproject.service.TicketService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,9 +32,26 @@ public class TicketController {
         this.ticketService.submitTicket(ticketSubmitDTO);
 
 
-        return new ModelAndView("redirect:/index");
+        return new ModelAndView("redirect:/");
 
     }
+
+
+    @GetMapping("ticket/{id}")
+public ModelAndView viewTicket(@PathVariable("id") Long id){
+
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("ticket-view");
+
+        TicketViewDTO ticketViewDTO = ticketService.getTicketById(id);
+
+        mv.addObject("ticketViewDTO",ticketViewDTO);
+
+        return mv;
+
+    }
+
 
     @ModelAttribute
     public TicketSubmitDTO ticketSubmitDTO(){

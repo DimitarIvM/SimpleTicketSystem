@@ -7,7 +7,7 @@
     <title>STS</title>
 </head>
 <body>
-
+<nav th:replace="~{fragments/nav}"></nav>
 <form th:action="@{/employees/register}" th:method="post" th:object="${employeeRegisterDTO}">
 
 

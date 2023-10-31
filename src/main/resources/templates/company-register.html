@@ -5,7 +5,8 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/companies/register}" th:method="post" th:object="${companyRegisterDTO}">
+<nav th:replace="~{fragments/nav}"></nav>
+<form th:action="@{/company/register}" th:method="post" th:object="${companyRegisterDTO}">
 
     <div class="form-group">
         <div class="label-holder text-white textCol d-flex justify-content-center">

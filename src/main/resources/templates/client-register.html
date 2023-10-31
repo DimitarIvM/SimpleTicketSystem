@@ -6,6 +6,8 @@
 </head>
 <body>
 
+<nav th:replace="~{fragments/nav}"></nav>
+
 <form th:method="post" th:action="@{/clients/register}" th:object="${clientRegistrationDTO}">
 
     <div class="form-group">

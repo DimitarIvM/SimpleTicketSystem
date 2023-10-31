@@ -13,16 +13,6 @@ public class Role extends BaseEntity{
     @NotNull
     private EmployeeRoleEnum role;
 
-    @ManyToMany
-    private Set<Employee> employee;
-
-    public Set<Employee> getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Set<Employee> employee) {
-        this.employee = employee;
-    }
 
     public EmployeeRoleEnum getRole() {
         return role;

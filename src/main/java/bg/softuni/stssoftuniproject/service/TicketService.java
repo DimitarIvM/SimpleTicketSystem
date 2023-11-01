@@ -11,4 +11,5 @@ public interface TicketService {
 
     AllTicketsDTO getAllById(Long id);
 
+    void saveNotes(TicketViewDTO ticketViewDTO);
 }

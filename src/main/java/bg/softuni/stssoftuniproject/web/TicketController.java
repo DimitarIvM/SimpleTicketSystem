@@ -21,6 +21,13 @@ public class TicketController {
         this.ticketService = ticketService;
     }
 
+//    @PostMapping("/ticket/take/{id}")
+//    public ModelAndView takeTicket(@PathVariable("id") Long id){
+//
+//        return new ModelAndView("redirect:/");
+//
+//    }
+
     @GetMapping("/tickets/{id}")
     public ModelAndView getAllTickets(@PathVariable("id")Long id){
         ModelAndView mv = new ModelAndView();
@@ -69,6 +76,21 @@ public ModelAndView viewTicket(@PathVariable("id") Long id){
 
     }
 
+    @PostMapping("/ticket/{id}")
+    public ModelAndView postTicket(@PathVariable("id") TicketViewDTO ticketViewDTO){
+
+        ModelAndView mv = new ModelAndView();
+
+        mv.setViewName("ticket-view");
+
+
+       this.ticketService.saveNotes(ticketViewDTO);
+
+        mv.setViewName("redirect:/ticket/{id}");
+
+        return mv;
+
+    }
 
     @ModelAttribute
     public TicketSubmitDTO ticketSubmitDTO(){

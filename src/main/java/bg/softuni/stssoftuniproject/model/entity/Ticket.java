@@ -27,6 +27,8 @@ public class Ticket  extends BaseEntity{
     @Column(columnDefinition = "LONGTEXT",nullable = false)
     private String description;
 
+    @Column(columnDefinition = "LONGTEXT")
+    private String notes;
     @Column(nullable = false)
     private LocalDateTime created;
 
@@ -34,6 +36,14 @@ public class Ticket  extends BaseEntity{
     private LocalDateTime  modified;
     @OneToOne
     private Priority priority;
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
     public String getSubject() {
         return subject;

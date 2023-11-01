@@ -70,6 +70,24 @@ public class TicketServiceImpl implements TicketService {
 
     }
 
+    @Override
+    public void saveNotes(TicketViewDTO ticketViewDTO) {
+
+        Ticket ticket = this.findById(ticketViewDTO.getId());
+
+
+            ticket.setNotes(ticketViewDTO.getNotes());
+
+
+
+
+        this.ticketRepository.save(ticket);
+    }
+
+    private Ticket findById(Long id) {
+            return this.ticketRepository.findById(id).isPresent() ? this.ticketRepository.findById(id).get(): null;
+    }
+
     private Set<TicketDTO> getTickets(Long companyId){
 
         Set<TicketDTO> tickets = new HashSet<>();

@@ -1,0 +1,59 @@
+@import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
+
+*{
+     margin: 0px;
+     padding: 0px;
+}
+
+body{
+     font-family: 'Poppins', sans-serif;
+
+}
+.nav{
+     align-items: center;
+     background-color: #4C4556 ;
+     padding-top: 8px;
+     padding-bottom: 8px;
+}
+
+header{
+     display: flex;
+     justify-content: space-around;
+     align-items: center;
+
+}
+
+.hero .logo{
+     font-weight: 900;
+     color: #A0D3F9;
+}
+
+
+header .nav{
+     display: flex;
+     gap:40px;
+
+}
+
+header .nav ul{
+     display: flex;
+     list-style-type: none;
+     gap:40px;
+}
+
+nav ul li :not(:last-of-type){
+     margin-right:12px ;
+
+}
+.hero{
+     margin: 0;
+     background-size: cover;
+     background-repeat:   no-repeat;
+     background-position: center center;
+}
+
+a{
+     color: #F6C026 ;
+     cursor: pointer;
+}
+

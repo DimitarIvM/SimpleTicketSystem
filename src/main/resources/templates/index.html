@@ -1,11 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>STS</title>
+<head th:replace="~{fragments/head}">
+
 </head>
 <body>
 <nav th:replace="~{fragments/nav}"></nav>
-This is the index page.
+<main >
+    <div class="main">
+
+        <span class="welcome"> Welcome To</span>
+        <span class="STS"> STS</span>
+
+        <a class="main-button" th:href="@{/login}" > Get Started </a>
+    </div>
+
+    <div class="cards">
+
+
+
+        <div class="card">
+            <div class="imgContainer">
+                <img src="/images/submit.JPG" alt="ticket">
+            </div>
+            <div class="bottom">
+                <h1>Submit </h1>
+
+                <p> your ticket
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="imgContainer">
+                <img src="/images/notes.JPG" alt="notes">
+            </div>
+            <div class="bottom">
+                <h1>Save</h1>
+
+                <p> your notes
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="imgContainer">
+                <img src="/images/check.JPG" alt="notes">
+            </div>
+            <div class="bottom">
+                <h1>Check </h1>
+
+                <p> for updates
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+
+<footer th:replace="~{fragments/footer}">
+</footer>
 </body>
 </html>

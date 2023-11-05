@@ -1,17 +1,12 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>STS</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/css/style.css">
+<head th:replace="~{fragments/head}">
+
 </head>
 <body class="body">
 <nav class="nav" th:fragment="nav">
 
-
-    <body>
 
     <div class="hero">
         <header>
@@ -32,16 +27,13 @@
                     <li >  <a th:href="@{/employees/register}"> Register </a>
                     </li>
 
+
                 </ul>
 
 
             </nav>
         </header>
 
+    </div>
 
 </nav>
-
-
-
-</body>
-</html>

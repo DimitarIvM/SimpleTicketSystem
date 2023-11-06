@@ -192,7 +192,11 @@ ul{
     display: flex;
     flex-direction: column;
     align-items: center;
-background: lightgrey;
+background: darkgray;
+}
+
+.submit-ticket-main textarea{
+    height: 100px;
 }
 .form-group{
     display: flex;
@@ -201,7 +205,7 @@ background: lightgrey;
     margin: 10px 0px;
 }
 
-form-submit-ticket{
+.form-submit-ticket{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -213,6 +217,86 @@ body > main > form > div.button-wrapper{
     align-items: center;
 }
 
-form-control input{
-    background: red;
+.form-control {
+    width: 45vw;
+    height: 30px;
+    padding: 3px;
+    border: 1px solid gray;
+    border-radius: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+
+th {
+    background-color: #f2f2f2;
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+tr{
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+
+td {
+    padding: 8px;
+}
+
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tickets-view-main{
+    background-color: darkgray;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.tickets-view-main form{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.tickets-view-main textarea{
+    width: 45vw;
+    height: 100px;
+    padding: 3px;
+    font-size: 1.8rem;
+    border: 1px solid gray;
+}
+
+.main-register{
+
+}
+
+body > main > form > div.button-holder.d-flex.justify-content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.login-main{
+    background-color: darkgray;
+    padding: 10px;
+
+}
+
+.login-main input{
+  width: 30vw;
+
 }

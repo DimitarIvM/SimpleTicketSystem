@@ -1,70 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:replace="~{fragments/head}">
-
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>STS</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-<nav th:replace="~{fragments/nav}"></nav>
+<nav class="nav" th:fragment="nav">
+
+
+    <div class="hero">
+        <header>
+            <div class="logo">
+                <a th:href="@{/}"> Simple Ticket System
+                </a>
+
+            </div>
+
+            <nav class="nav">
+                <ul>
+                    <li> <a th:href="@{/company/register}"> Apply </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/ticket-submit}"> Submit Ticket </a>
+                    </li>
+
+                    <li > <a class="login" th:href="@{/company/register}"> Login </a></li>
+                    <li >  <a th:href="@{/employees/register}"> Register </a>
+                    </li>
+
+
+                </ul>
+
+
+            </nav>
+        </header>
+
+    </div>
+
+</nav>
 <main >
     <div class="main">
-
+    
         <span class="welcome"> Welcome To</span>
         <span class="STS"> STS</span>
-
+    
         <a class="main-button" th:href="@{/login}" > Get Started </a>
     </div>
 
     <div class="cards">
+          
+    
 
+            <div class="card">
+                <div class="imgContainer">
+                    <img src="/images/submit.JPG" alt="ticket">
+                </div>
+                <div class="bottom">
+                    <h1>Submit </h1>
+                
+                    <p> your ticket
+                    </p>
+                    
+                    </div>
+        
+                    </div>
 
+                    <div class="card">
+                        <div class="imgContainer">
+                            <img src="/images/notes.JPG" alt="notes">
+                        </div>
+                        <div class="bottom">
+                            <h1>Save</h1>
+                        
+                            <p> your notes
+                            </p>
+                
+                            </div>
+                
+                            </div>
 
-        <div class="card">
-            <div class="imgContainer">
-                <img src="/images/submit.JPG" alt="ticket">
-            </div>
-            <div class="bottom">
-                <h1>Submit </h1>
+                    <div class="card">
+                        <div class="imgContainer">
+                            <img src="/images/check.JPG" alt="notes">
+                        </div>
+                        <div class="bottom">
+                            <h1>Check </h1>
+                        
+                            <p> for updates
+                            </p>
+                            
+                            </div>
+                
+                            </div>
 
-                <p> your ticket
-                </p>
+                        </div>
+                    </main>
+<footer th:fragment="footer" class="footer">
 
-            </div>
+    <div class="footer-logo">
+        <a href="/"> Simple Ticket System</a></div>
 
-        </div>
-
-        <div class="card">
-            <div class="imgContainer">
-                <img src="/images/notes.JPG" alt="notes">
-            </div>
-            <div class="bottom">
-                <h1>Save</h1>
-
-                <p> your notes
-                </p>
-
-            </div>
-
-        </div>
-
-        <div class="card">
-            <div class="imgContainer">
-                <img src="/images/check.JPG" alt="notes">
-            </div>
-            <div class="bottom">
-                <h1>Check </h1>
-
-                <p> for updates
-                </p>
-
-            </div>
-
-        </div>
-
+    <div class="social"> Follow us on
+        <ul >
+            <li><i class="fab fa-instagram"></i></li>
+            <li><i class="fab fa-facebook-f"></i></li>
+            <li><i class="fab fa-twitter"></i></li>
+        </ul>
     </div>
-</main>
-
-
-<footer th:replace="~{fragments/footer}">
 </footer>
 </body>
 </html>

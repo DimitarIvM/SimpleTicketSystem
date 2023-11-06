@@ -1,40 +1,82 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>STS</title>
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <title>STS</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-<table th:object="${ticketViewDTO}" >
-  <thead>
+
+<nav class="nav" th:fragment="nav">
 
 
-  <td > Ticket Number:</td>
-  <td> Client name: </td>
-  <td> Ticket Owner: </td>
-  <td> Subject: </td>
-  <td> Created on: </td>
+  <div class="hero">
+    <header>
+      <div class="logo">
+        Simple Ticket System
 
-  </thead>
-  <tr>
-    <td th:text="${ticketViewDTO.id}"> your data row row 2 column 1</td>
-    <td  th:text="${ticketViewDTO.firstName}"> your data row row 2 column 2</td>
-    <td th:text="${ticketViewDTO.owner}"> your data row row 2 column 3</td>
-    <td th:text="${ticketViewDTO.subject}"> your data row row 2 column 3</td>
-    <td th:text="${ticketViewDTO.created}"> your data row row 2 column 3</td>
+      </div>
 
-  </tr>
-</table>
+      <nav class="nav">
+        <ul>
+          <li> <a th:href="@{/company/register}"> Apply </a>
+          </li>
+          <li>
+            <a th:href="@{/ticket-submit}"> Submit Ticket </a>
+          </li>
 
-<label for="Description"> Description</label>
-<textarea id="Description"   th:text="${ticketViewDTO.description}"></textarea>
+          <li > <a class="login" th:href="@{/company/register}"> Login </a></li>
+          <li >  <a th:href="@{/employees/register}"> Register </a>
+          </li>
 
-<form th:method="post" th:action="@{/ticket/{id} (id = ${ticketViewDTO.id})}">
-  <label for="notes" >Notes </label>
-  <textarea th:field="*{ticketViewDTO.notes}" name="notes" id="notes" ></textarea>
-  <button type="submit">Save</button>
-</form>
+
+        </ul>
+
+
+      </nav>
+    </header>
+
+  </div>
+
+</nav>
+
+<main class="tickets-view-main">
+  <table th:object="${ticketViewDTO}" >
+    <thead>
+
+
+    <td > Ticket Number:</td>
+    <td> Client name: </td>
+    <td> Ticket Owner: </td>
+    <td> Subject: </td>
+    <td> Created on: </td>
+
+    </thead>
+    <tr>
+      <td th:text="${ticketViewDTO.id}"> your data row row 2 column 1</td>
+      <td  th:text="${ticketViewDTO.firstName}"> your data row row 2 column 2</td>
+      <td th:text="${ticketViewDTO.owner}"> your data row row 2 column 3</td>
+      <td th:text="${ticketViewDTO.subject}"> your data row row 2 column 3</td>
+      <td th:text="${ticketViewDTO.created}"> your data row row 2 column 3</td>
+
+    </tr>
+  </table>
+
+  <label for="Description"> Description</label>
+  <textarea id="Description"   th:text="${ticketViewDTO.description}"></textarea>
+
+  <form th:method="post" th:action="@{/ticket/{id} (id = ${ticketViewDTO.id})}">
+    <label for="notes" >Notes </label>
+    <textarea th:field="*{ticketViewDTO.notes}" name="notes" id="notes" ></textarea>
+    <button class="main-button" type="submit">Save</button>
+  </form>
+</main>
+
+
 
 
 
@@ -43,6 +85,18 @@
 
 <!--  <button type="submit">Take</button> </form>-->
 
+<footer th:fragment="footer" class="footer">
 
+  <div class="footer-logo">
+    <a href="/"> Simple Ticket System</a></div>
+
+  <div class="social"> Follow us on
+    <ul >
+      <li><i class="fab fa-instagram"></i></li>
+      <li><i class="fab fa-facebook-f"></i></li>
+      <li><i class="fab fa-twitter"></i></li>
+    </ul>
+  </div>
+</footer>
 </body>
 </html>

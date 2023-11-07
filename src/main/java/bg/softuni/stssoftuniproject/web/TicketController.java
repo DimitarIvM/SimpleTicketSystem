@@ -4,7 +4,6 @@ import bg.softuni.stssoftuniproject.model.dto.AllTicketsDTO;
 import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
 import bg.softuni.stssoftuniproject.model.dto.TicketViewDTO;
 import bg.softuni.stssoftuniproject.service.TicketService;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +28,7 @@ public class TicketController {
 //    }
 
     @GetMapping("/tickets/{id}")
-    public ModelAndView getAllTickets(@PathVariable("id")Long id){
+    public ModelAndView getAllTicketsForEmployee(@PathVariable("id")Long id){
         ModelAndView mv = new ModelAndView();
 
         AllTicketsDTO allTicketsDTO = this.ticketService.getAllById(id);
@@ -62,7 +61,7 @@ public class TicketController {
 
 
     @GetMapping("/ticket/{id}")
-public ModelAndView viewTicket(@PathVariable("id") Long id){
+public ModelAndView viewTicketForEmployee(@PathVariable("id") Long id){
 
         ModelAndView mv = new ModelAndView();
 

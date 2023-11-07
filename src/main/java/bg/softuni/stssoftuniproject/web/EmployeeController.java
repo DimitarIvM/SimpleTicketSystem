@@ -29,12 +29,6 @@ public class EmployeeController {
 
     }
 
-    @GetMapping("/login")
-    public ModelAndView login() {
-
-        return new ModelAndView("login");
-
-    }
 
     @PostMapping("/register")
     public ModelAndView register(@Valid EmployeeRegisterDTO employeeRegisterDTO,

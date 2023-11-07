@@ -4,7 +4,7 @@ import bg.softuni.stssoftuniproject.model.dto.EmployeeRegisterDTO;
 import bg.softuni.stssoftuniproject.model.entity.Company;
 import bg.softuni.stssoftuniproject.model.entity.Employee;
 import bg.softuni.stssoftuniproject.model.entity.Role;
-import bg.softuni.stssoftuniproject.model.enums.EmployeeRoleEnum;
+import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
 import bg.softuni.stssoftuniproject.repository.EmployeeRepository;
 import bg.softuni.stssoftuniproject.service.CompanyService;
 import bg.softuni.stssoftuniproject.service.EmployeeService;
@@ -27,7 +27,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     private PasswordEncoder passwordEncoder;
     private RoleService roleService;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, ModelMapper modelMapper, CompanyService companyService, PasswordEncoder passwordEncoder, RoleService roleService) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository,
+                               ModelMapper modelMapper,
+                               CompanyService companyService,
+                               PasswordEncoder passwordEncoder,
+                               RoleService roleService) {
         this.employeeRepository = employeeRepository;
         this.modelMapper = modelMapper;
         this.companyService = companyService;
@@ -48,10 +52,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         Set<Role> roles = new HashSet<>();
         if (company.isPresent()) {
             if (company.get().getEmployees().size() == 0) {
-                role = this.roleService.findByRoleName(EmployeeRoleEnum.ADMIN);
+                role = this.roleService.findByRoleName(RolesEnum.ADMIN);
                 roles.add(role);
             }
-            role = this.roleService.findByRoleName(EmployeeRoleEnum.USER);
+            role = this.roleService.findByRoleName(RolesEnum.USER);
             roles.add(role);
 
             Employee employee = modelMapper.map(employeeRegisterDTO, Employee.class);

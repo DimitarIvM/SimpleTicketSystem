@@ -28,9 +28,13 @@
                         <a th:href="@{/ticket-submit}"> Submit Ticket </a>
                     </li>
 
-                    <li > <a class="login" th:href="@{/company/register}"> Login </a></li>
+                    <li >  <a th:href="@{/tickets/{id}}"> My Tickets </a>
+                    </li>
+
+                    <li > <a class="login" th:href="@{/employees/login}"> Login </a></li>
                     <li >  <a th:href="@{/employees/register}"> Register </a>
                     </li>
+
 
 
                 </ul>

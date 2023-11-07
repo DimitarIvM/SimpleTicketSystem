@@ -43,33 +43,31 @@
 </nav>
 <main class="login-main">
 
-    <form >
-        <div class="form-group">
-            <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="firstName" class="h4 mb-2">Username </label>
-            </div>
-            <input th:field="*{firstName}" th:errorclass="'is-invalid alert-danger'"
-                   type="text" class="form-control" id="firstName" name="firstName"/>
-            <small th:errors="*{firstName}"
-                   th:if="${#fields.hasErrors('firstName')}" class="invalid-feedback text-danger">First name error message</small>
-        </div>
 
-        <div class="form-group">
-            <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="lastName" class="h4 mb-2">Password</label>
+        <form th:method="post"
+              th:action="@{/login}"
+              class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            <div class="form-group">
+                <label for="email" class="text-white font-weight-bold">Username</label>
+                <input id="email"
+                       name="email"
+                       type="text"
+                       class="form-control"
+                       placeholder="Email"/>
             </div>
-            <input th:field="*{lastName}" th:errorclass="'is-invalid alert-danger'"
-                   type="text" class="form-control" id="lastName" name="lastName"/>
-            <small th:errors="*{lastName}"
-                   th:if="${#fields.hasErrors('lastName')}" class="invalid-feedback text-danger">Email error message</small>
-        </div>
+            <div class="form-group">
+                <label for="password" class="text-white font-weight-bold">Password</label>
+                <input id="password"
+                       name="password"
+                       type="password"
+                       class="form-control"
+                       placeholder="Password"/>
+
+            </div>
 
         <div class="button-wrapper">
             <button type="submit"  class="main-button" value="Register">Submit</button>
         </div>
-
-
-
 
     </form>
 </main>

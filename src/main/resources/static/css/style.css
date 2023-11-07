@@ -300,3 +300,14 @@ body > main > form > div.button-holder.d-flex.justify-content-center {
   width: 30vw;
 
 }
+
+
+.company-apply {
+    background-color: darkgray;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+

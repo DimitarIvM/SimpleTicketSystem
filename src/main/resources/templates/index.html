@@ -9,39 +9,44 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
-<nav class="nav" th:fragment="nav">
+
+<div><nav th:replace="~{fragments/nav}"></nav></div>
+
+<!--<nav class="nav" th:fragment="nav">-->
 
 
-    <div class="hero">
-        <header>
-            <div class="logo">
-                <a th:href="@{/}"> Simple Ticket System
-                </a>
+<!--    <div class="hero">-->
+<!--        <header>-->
+<!--            <div class="logo">-->
+<!--                Simple Ticket System-->
 
-            </div>
+<!--            </div>-->
 
-            <nav class="nav">
-                <ul>
-                    <li> <a th:href="@{/company/register}"> Apply </a>
-                    </li>
-                    <li>
-                        <a th:href="@{/ticket-submit}"> Submit Ticket </a>
-                    </li>
+<!--            <nav class="nav">-->
+<!--                <ul>-->
+<!--                    <li> <a th:href="@{/company/register}"> Apply </a>-->
+<!--                    </li>-->
+<!--                    <li>-->
+<!--                        <a th:href="@{/ticket-submit}"> Submit Ticket </a>-->
+<!--                    </li>-->
 
-                    <li > <a class="login" th:href="@{/company/register}"> Login </a></li>
-                    <li >  <a th:href="@{/employees/register}"> Register </a>
-                    </li>
+<!--                    <li >  <a th:href="@{/tickets/{id}}"> My Tickets </a>-->
+<!--                    </li>-->
+
+<!--                    <li > <a class="login" href=/login> Login </a></li>-->
+
+<!--                    <li > <a class="login" th:href="@{/logout}"> Logout </a>-->
+<!--                    </li>-->
+<!--                    <li >  <a th:href="@{/register}"> Register </a>-->
+<!--                    </li>-->
 
 
-                </ul>
+
+<!--                </ul>-->
 
 
-            </nav>
-        </header>
+<!--            </nav>-->
 
-    </div>
-
-</nav>
 <main >
     <div class="main">
     

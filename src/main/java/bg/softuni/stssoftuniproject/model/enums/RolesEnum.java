@@ -1,6 +1,6 @@
 package bg.softuni.stssoftuniproject.model.enums;
 
-public enum EmployeeRoleEnum {
+public enum RolesEnum {
 
     ADMIN,
     USER

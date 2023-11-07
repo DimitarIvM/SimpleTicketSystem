@@ -1,7 +1,8 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
 import bg.softuni.stssoftuniproject.model.entity.Role;
-import bg.softuni.stssoftuniproject.model.enums.EmployeeRoleEnum;
+
+import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
 import bg.softuni.stssoftuniproject.repository.RoleRepository;
 import bg.softuni.stssoftuniproject.service.RoleService;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,8 @@ public class RoleServiceImpl implements RoleService {
             Role user = new Role();
             Role admin = new Role();
 
-            user.setRole(EmployeeRoleEnum.USER);
-            admin.setRole(EmployeeRoleEnum.ADMIN);
+            user.setRole(RolesEnum.USER);
+            admin.setRole(RolesEnum.ADMIN);
 
             roleRepository.save(user);
             roleRepository.save(admin);
@@ -35,7 +36,7 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public Role findByRoleName(EmployeeRoleEnum employeeRoleEnum) {
+    public Role findByRoleName(RolesEnum employeeRoleEnum) {
         return this.roleRepository.findByRole(employeeRoleEnum);
     }
 }

@@ -1,6 +1,7 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
-import bg.softuni.stssoftuniproject.model.enums.EmployeeRoleEnum;
+
+import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -11,14 +12,14 @@ public class Role extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @NotNull
-    private EmployeeRoleEnum role;
+    private RolesEnum role;
 
 
-    public EmployeeRoleEnum getRole() {
+    public RolesEnum getRole() {
         return role;
     }
 
-    public void setRole(EmployeeRoleEnum role) {
+    public void setRole(RolesEnum role) {
         this.role = role;
     }
 }

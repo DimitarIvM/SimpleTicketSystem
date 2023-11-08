@@ -1,7 +1,7 @@
 package bg.softuni.stssoftuniproject.web;
 
 import bg.softuni.stssoftuniproject.model.dto.EmployeeRegisterDTO;
-import bg.softuni.stssoftuniproject.service.EmployeeService;
+import bg.softuni.stssoftuniproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -14,18 +14,19 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-@RequestMapping("/employees")
-public class EmployeeController {
-    private final EmployeeService employeeService;
+@RequestMapping("/users")
+public class UserController {
+    private final UserService userService;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/register")
     public ModelAndView register() {
 
-        return new ModelAndView("employee-register");
+        return new ModelAndView("register");
 
     }
 
@@ -50,7 +51,7 @@ public class EmployeeController {
 
         }
 
-        employeeService.register(employeeRegisterDTO);
+        userService.register(employeeRegisterDTO);
 
 
         return new ModelAndView("redirect:/employees/login");

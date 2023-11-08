@@ -8,5 +8,5 @@ import java.util.Set;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket,Long> {
-    Set<Ticket> findAllByCompanyId(Long id);
+
 }

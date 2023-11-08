@@ -1,6 +1,6 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
-import bg.softuni.stssoftuniproject.model.entity.Company;
+
 import jakarta.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,9 +14,6 @@ public class TicketSubmitDTO {
 
   @NotNull
     private String clientEmail;
-
- @NotNull
-    private Company company;
 
  @NotNull
     private String description;
@@ -45,13 +42,6 @@ public class TicketSubmitDTO {
         this.clientEmail = clientEmail;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
 
     public String getDescription() {
         return description;

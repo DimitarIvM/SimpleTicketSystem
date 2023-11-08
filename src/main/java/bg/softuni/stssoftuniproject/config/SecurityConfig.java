@@ -1,7 +1,7 @@
 package bg.softuni.stssoftuniproject.config;
 
 import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
-import bg.softuni.stssoftuniproject.repository.EmployeeRepository;
+import bg.softuni.stssoftuniproject.repository.UserRepository;
 import bg.softuni.stssoftuniproject.service.impl.UserDetailsServiceImpl;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -19,7 +19,8 @@ public class SecurityConfig {
         return httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers((PathRequest.toStaticResources().atCommonLocations())).permitAll()
-                        .requestMatchers("/","/login","/company/register","/employees/register").permitAll()
+                        .requestMatchers("/","/login","/users/register").permitAll()
+                        .requestMatchers("/tickets/**").hasRole(RolesEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin ->{
@@ -40,8 +41,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(EmployeeRepository employeeRepository) {
-        return new UserDetailsServiceImpl(employeeRepository);
+    public UserDetailsService userDetailsService(UserRepository userRepository) {
+        return new UserDetailsServiceImpl(userRepository);
     }
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {

@@ -1,8 +1,0 @@
-Company comes in and applies -> TODO: send an email to confirm registration
-Admin account registers an employee under it
-//TODO: Customer receives e-mail to register and registers
-Submits ticket = done
-TODO: Ticket is visible to each employee in the company and they can take it
-TODO: Admin can assign ticket to employee
-TODO: employee can add the note it should be visible to client, admin and him
-Todo: Visualize ticket = done

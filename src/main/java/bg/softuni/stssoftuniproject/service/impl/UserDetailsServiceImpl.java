@@ -1,8 +1,8 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
-import bg.softuni.stssoftuniproject.model.entity.Employee;
 import bg.softuni.stssoftuniproject.model.entity.Role;
-import bg.softuni.stssoftuniproject.repository.EmployeeRepository;
+import bg.softuni.stssoftuniproject.model.entity.User;
+import bg.softuni.stssoftuniproject.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,19 +12,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private EmployeeRepository employeeRepository;
+    private UserRepository userRepository;
     private ModelMapper modelMapper = new ModelMapper();
 
-    public UserDetailsServiceImpl(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
 
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-       Employee employee = employeeRepository.findByEmail(username);
+       User user = userRepository.findByEmail(username);
 
-       UserDetails userDetails = modelMapper.map(employee, UserDetails.class);
+       UserDetails userDetails = modelMapper.map(user, UserDetails.class);
 
        if (username == null){
            throw new UsernameNotFoundException("User " + username +"not found!");

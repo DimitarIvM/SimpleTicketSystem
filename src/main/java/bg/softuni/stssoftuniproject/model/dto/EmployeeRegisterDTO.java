@@ -1,6 +1,5 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
-import bg.softuni.stssoftuniproject.validation.anotations.UniqueCompanyName;
 import bg.softuni.stssoftuniproject.validation.anotations.UniqueEmail;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

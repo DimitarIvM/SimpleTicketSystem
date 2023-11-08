@@ -1,13 +1,12 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 import java.util.Set;
 
 @Entity
-@Table(name = "employees")
-public class Employee extends BaseEntity {
+@Table(name = "users")
+public class User extends BaseEntity {
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
@@ -22,16 +21,12 @@ public class Employee extends BaseEntity {
     private Set<Ticket> tickets;
 
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name="company_id")
-    private Company company;
 
     @ManyToMany(targetEntity = Role.class,fetch = FetchType.EAGER)
     @JoinTable(
-            name = "employees_roles",
+            name = "users_roles",
             joinColumns = @JoinColumn(
-                    name = "employee_id",
+                    name = "user_id",
                     referencedColumnName = "id"
             ),
             inverseJoinColumns = @JoinColumn(
@@ -92,11 +87,4 @@ public class Employee extends BaseEntity {
         this.tickets = tickets;
     }
 
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
-    }
 }

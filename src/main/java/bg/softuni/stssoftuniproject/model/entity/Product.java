@@ -19,12 +19,9 @@ public class Product  extends BaseEntity {
     private String serialNumber;
 
     @ManyToOne
-    private Company company;
-
-    @ManyToOne
     private Ticket ticket;
     @ManyToOne
-    private Client client;
+    private User client;
 
     public Ticket getTicket() {
         return ticket;
@@ -34,21 +31,15 @@ public class Product  extends BaseEntity {
         this.ticket = ticket;
     }
 
-    public Client getClient() {
+    public User getClient() {
         return client;
     }
 
-    public void setClient(Client client) {
+    public void setClient(User client) {
         this.client = client;
     }
 
-    public Company getCompany() {
-        return company;
-    }
 
-    public void setCompany(Company company) {
-        this.company = company;
-    }
 
 
 

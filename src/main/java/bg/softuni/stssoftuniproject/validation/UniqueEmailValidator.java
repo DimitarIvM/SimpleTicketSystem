@@ -1,22 +1,22 @@
 package bg.softuni.stssoftuniproject.validation;
 
 
-import bg.softuni.stssoftuniproject.service.EmployeeService;
+import bg.softuni.stssoftuniproject.service.UserService;
 import bg.softuni.stssoftuniproject.validation.anotations.UniqueEmail;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, String> {
 
-  private final EmployeeService employeeService;
+  private final UserService userService;
 
-    public UniqueEmailValidator(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+    public UniqueEmailValidator(UserService employeeService) {
+        this.userService = employeeService;
     }
 
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext context) {
-       return !this.employeeService.existsUserByEmail(email);
+       return !this.userService.existsUserByEmail(email);
     }
 }

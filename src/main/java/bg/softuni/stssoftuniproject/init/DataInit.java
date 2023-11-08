@@ -1,6 +1,5 @@
 package bg.softuni.stssoftuniproject.init;
 
-import bg.softuni.stssoftuniproject.service.ClientService;
 import bg.softuni.stssoftuniproject.service.PriorityService;
 import bg.softuni.stssoftuniproject.service.RoleService;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +12,7 @@ public class DataInit implements CommandLineRunner {
 
 
 
-    public DataInit(PriorityService priorityService, RoleService roleService, ClientService clientService) {
+    public DataInit(PriorityService priorityService, RoleService roleService ) {
         this.priorityService = priorityService;
 
         this.roleService = roleService;

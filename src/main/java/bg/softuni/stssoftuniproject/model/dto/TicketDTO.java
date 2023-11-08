@@ -1,8 +1,6 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
-import bg.softuni.stssoftuniproject.model.entity.Client;
-import bg.softuni.stssoftuniproject.model.entity.Company;
-import bg.softuni.stssoftuniproject.model.entity.Employee;
+import bg.softuni.stssoftuniproject.model.entity.User;
 
 import java.time.LocalDateTime;
 
@@ -21,19 +19,7 @@ public class TicketDTO {
     private String subject;
 
 
-    private Client client;
-
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    private Company companyName;
-
-
+    private User client;
 
 
     private LocalDateTime created;
@@ -46,14 +32,6 @@ public class TicketDTO {
         this.subject = subject;
     }
 
-
-    public Company getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(Company companyName) {
-        this.companyName = companyName;
-    }
 
     public LocalDateTime getCreated() {
         return created;

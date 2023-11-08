@@ -1,8 +1,8 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
-import bg.softuni.stssoftuniproject.model.dto.EmployeeRegisterDTO;
+import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.model.entity.Role;
-import bg.softuni.stssoftuniproject.model.entity.User;
+import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
 import bg.softuni.stssoftuniproject.repository.UserRepository;
 import bg.softuni.stssoftuniproject.service.RoleService;
@@ -25,10 +25,10 @@ public class UserServiceImpl implements UserService {
     private final RoleService roleService;
 
     public UserServiceImpl(UserRepository userRepository,
-                               ModelMapper modelMapper,
+                           ModelMapper modelMapper,
 
-                               PasswordEncoder passwordEncoder,
-                               RoleService roleService) {
+                           PasswordEncoder passwordEncoder,
+                           RoleService roleService) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.passwordEncoder = passwordEncoder;
@@ -41,26 +41,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void register(EmployeeRegisterDTO employeeRegisterDTO) {
+    public void register(UserRegisterDTO userRegisterDTO) {
 
 
         Role role = new Role();
         Set<Role> roles = new HashSet<>();
-
-
-            role = this.roleService.findByRoleName(RolesEnum.USER);
+        if (this.userRepository.count() == 0) {
+            role = this.roleService.findByRoleName(RolesEnum.ADMIN);
             roles.add(role);
-
-            User user = modelMapper.map(employeeRegisterDTO, User.class);
-
-        user.setPassword(passwordEncoder.encode(employeeRegisterDTO.getPassword()));
-
-        user.setRoles(roles);
-
-            userRepository.save(user);
 
         }
 
+        role = this.roleService.findByRoleName(RolesEnum.USER);
+        roles.add(role);
+
+
+        UserEntity user = modelMapper.map(userRegisterDTO, UserEntity.class);
+
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+
+        user.setRoles(roles);
+
+        userRepository.save(user);
 
     }
+
+
+}
 

@@ -21,7 +21,7 @@ public class Product  extends BaseEntity {
     @ManyToOne
     private Ticket ticket;
     @ManyToOne
-    private User client;
+    private UserEntity client;
 
     public Ticket getTicket() {
         return ticket;
@@ -31,11 +31,11 @@ public class Product  extends BaseEntity {
         this.ticket = ticket;
     }
 
-    public User getClient() {
+    public UserEntity getClient() {
         return client;
     }
 
-    public void setClient(User client) {
+    public void setClient(UserEntity client) {
         this.client = client;
     }
 

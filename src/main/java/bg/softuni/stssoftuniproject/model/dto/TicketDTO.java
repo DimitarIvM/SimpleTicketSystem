@@ -1,6 +1,6 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
-import bg.softuni.stssoftuniproject.model.entity.User;
+import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 
 import java.time.LocalDateTime;
 
@@ -19,8 +19,11 @@ public class TicketDTO {
     private String subject;
 
 
-    private User client;
+    private UserEntity client;
 
+    public void setClient(UserEntity client) {
+        this.client = client;
+    }
 
     private LocalDateTime created;
 

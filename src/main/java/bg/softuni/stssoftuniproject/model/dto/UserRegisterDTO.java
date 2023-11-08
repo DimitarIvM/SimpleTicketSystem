@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class EmployeeRegisterDTO {
+public class UserRegisterDTO {
 
     @NotNull
     private String firstName;
@@ -23,9 +23,6 @@ public class EmployeeRegisterDTO {
     @Size(min = 5, max = 16)
     private String confirmPassword;
 
-
-    @NotNull
-    private String companyName;
 
     public String getFirstName() {
         return firstName;
@@ -67,11 +64,5 @@ public class EmployeeRegisterDTO {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
 }

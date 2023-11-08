@@ -15,10 +15,10 @@ public class Ticket  extends BaseEntity{
 
     @ManyToOne
     @NotNull
-    private User client;
+    private UserEntity client;
 
     @ManyToOne
-    private User ticketAssignee;
+    private UserEntity ticketAssignee;
 
 
     @Column(columnDefinition = "LONGTEXT",nullable = false)
@@ -50,19 +50,19 @@ public class Ticket  extends BaseEntity{
         this.subject = subject;
     }
 
-    public User getClient() {
+    public UserEntity getClient() {
         return client;
     }
 
-    public void setClient(User client) {
+    public void setClient(UserEntity client) {
         this.client = client;
     }
 
-    public User getTicketAssignee() {
+    public UserEntity getTicketAssignee() {
         return ticketAssignee;
     }
 
-    public void setTicketAssignee(User ticketAssignee) {
+    public void setTicketAssignee(UserEntity ticketAssignee) {
         this.ticketAssignee = ticketAssignee;
     }
 

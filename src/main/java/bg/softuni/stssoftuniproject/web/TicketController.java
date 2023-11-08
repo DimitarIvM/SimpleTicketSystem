@@ -15,17 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class TicketController {
 
     private final TicketService ticketService;
-//TODO: add product
+
     public TicketController(TicketService ticketService) {
         this.ticketService = ticketService;
     }
 
-//    @PostMapping("/ticket/take/{id}")
-//    public ModelAndView takeTicket(@PathVariable("id") Long id){
-//
-//        return new ModelAndView("redirect:/");
-//
-//    }
+
 
     @GetMapping("/tickets/{id}")
     public ModelAndView getAllTicketsForEmployee(@PathVariable("id")Long id){

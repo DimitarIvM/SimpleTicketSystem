@@ -2,11 +2,12 @@ package bg.softuni.stssoftuniproject.model.entity;
 
 import jakarta.persistence.*;
 
+
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User extends BaseEntity {
+public class UserEntity extends BaseEntity {
     @Column(nullable = false)
     private String firstName;
     @Column(nullable = false)
@@ -87,4 +88,8 @@ public class User extends BaseEntity {
         this.tickets = tickets;
     }
 
+
+    public String getFullName(){
+        return this.firstName + " " + this.lastName;
+    }
 }

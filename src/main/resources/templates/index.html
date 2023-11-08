@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>STS</title>
@@ -8,52 +9,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
-<body>
+<body class="body">
 
-<div><nav th:replace="~{fragments/nav}"></nav></div>
-
-<!--<nav class="nav" th:fragment="nav">-->
+<nav th:replace="~{fragments/nav}"></nav>
 
 
-<!--    <div class="hero">-->
-<!--        <header>-->
-<!--            <div class="logo">-->
-<!--                Simple Ticket System-->
-
-<!--            </div>-->
-
-<!--            <nav class="nav">-->
-<!--                <ul>-->
-<!--                    <li> <a th:href="@{/company/register}"> Apply </a>-->
-<!--                    </li>-->
-<!--                    <li>-->
-<!--                        <a th:href="@{/ticket-submit}"> Submit Ticket </a>-->
-<!--                    </li>-->
-
-<!--                    <li >  <a th:href="@{/tickets/{id}}"> My Tickets </a>-->
-<!--                    </li>-->
-
-<!--                    <li > <a class="login" href=/login> Login </a></li>-->
-
-<!--                    <li > <a class="login" th:href="@{/logout}"> Logout </a>-->
-<!--                    </li>-->
-<!--                    <li >  <a th:href="@{/register}"> Register </a>-->
-<!--                    </li>-->
-
-
-
-<!--                </ul>-->
-
-
-<!--            </nav>-->
-
-<main >
+<main>
     <div class="main">
-    
+
         <span class="welcome"> Welcome To</span>
         <span class="STS"> STS</span>
     
-        <a class="main-button" th:href="@{/login}" > Get Started </a>
+        <a class="main-button" th:href="@{/users/register}" > Get Started </a>
     </div>
 
     <div class="cards">

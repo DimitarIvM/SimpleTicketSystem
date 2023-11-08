@@ -5,38 +5,46 @@
 
 </head>
 <body class="body">
-<nav class="nav" th:fragment="nav">
 
 
-    <div class="hero">
-        <header>
-            <div class="logo">
-                Simple Ticket System
+ <nav class="nav" th:fragment="nav">
 
-            </div>
+     <div class="hero">
+     <header>
+         <div class="logo">
+             <a href="/">Simple Ticket System</a>
 
-            <nav class="nav">
-                <ul>
-<!--                    <li> <a th:href="@{/company/register}"> Apply </a>-->
-<!--                    </li>-->
+         </div>
 
-                    <li >  <a th:href="@{/tickets/{id}}"> My Tickets </a>
-                                            </li>
+         <nav class="nav">
+             <ul>
 
-                    <li>
-                        <a th:href="@{/ticket-submit}"> Submit Ticket </a>
-                    </li>
+                 <li >  <a th:href="@{/tickets/{id}}"> My Tickets </a>
+                 </li>
 
-                    <li > <a class="login" th:href="@{/login}"> Login </a></li>
+                 <li>
+                     <a th:href="@{/ticket-submit}"> Submit Ticket </a>
+                 </li>
 
-                    <li >  <a th:href="@{/users/register}"> Register </a>
-                    </li>
+                 <li > <a th:href="@{/users/login}"> Login </a></li>
+
+                 <li >  <a th:href="@{/users/register}"> Register </a>
+                 </li>
+                 <li >
+                 <form th:method="post"
+                       th:action="@{/logout}">
+                  <button type="submit" th:href="@{/logout}"> Logout </button>
+                     </form>
+                 </li>
 
 
-                </ul>
+             </ul>
 
 
-            </nav>
+         </nav> </nav>
+
+
+
         </header>
 
     </div>

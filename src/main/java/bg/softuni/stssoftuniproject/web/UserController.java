@@ -1,6 +1,6 @@
 package bg.softuni.stssoftuniproject.web;
 
-import bg.softuni.stssoftuniproject.model.dto.EmployeeRegisterDTO;
+import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -23,6 +23,14 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping("/login")
+    public ModelAndView login() {
+
+        return new ModelAndView("login");
+
+    }
+
+
     @GetMapping("/register")
     public ModelAndView register() {
 
@@ -32,11 +40,11 @@ public class UserController {
 
 
     @PostMapping("/register")
-    public ModelAndView register(@Valid EmployeeRegisterDTO employeeRegisterDTO,
+    public ModelAndView register(@Valid UserRegisterDTO userRegisterDTO,
                                  BindingResult bindingResult,
                                  RedirectAttributes redirectAttributes) {
 
-        if (!employeeRegisterDTO.getPassword().equals(employeeRegisterDTO.getConfirmPassword())) {
+        if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
             bindingResult.addError(new FieldError(
                     "passwordNotMatched",
                     "confirmPassword",
@@ -44,23 +52,23 @@ public class UserController {
         }
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("employeeRegisterDTO", employeeRegisterDTO)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.employeeRegisterDTO", bindingResult);
+            redirectAttributes.addFlashAttribute("userRegisterDTO", userRegisterDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.userRegisterDTO", bindingResult);
 
-            return new ModelAndView("redirect:/employees/register");
+            return new ModelAndView("redirect:/users/register");
 
         }
 
-        userService.register(employeeRegisterDTO);
+        userService.register(userRegisterDTO);
 
 
-        return new ModelAndView("redirect:/employees/login");
+        return new ModelAndView("redirect:/users/login");
 
     }
 
     @ModelAttribute
-    public EmployeeRegisterDTO employeeRegisterDTO() {
+    public UserRegisterDTO userRegisterDTO() {
 
-        return new EmployeeRegisterDTO();
+        return new UserRegisterDTO();
     }
 }

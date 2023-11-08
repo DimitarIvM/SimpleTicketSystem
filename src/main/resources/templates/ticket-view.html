@@ -11,38 +11,7 @@
 </head>
 <body>
 
-<nav class="nav" th:fragment="nav">
-
-
-  <div class="hero">
-    <header>
-      <div class="logo">
-        Simple Ticket System
-
-      </div>
-
-      <nav class="nav">
-        <ul>
-          <li> <a th:href="@{/company/register}"> Apply </a>
-          </li>
-          <li>
-            <a th:href="@{/ticket-submit}"> Submit Ticket </a>
-          </li>
-
-          <li > <a class="login" th:href="@{/company/register}"> Login </a></li>
-          <li >  <a th:href="@{/employees/register}"> Register </a>
-          </li>
-
-
-        </ul>
-
-
-      </nav>
-    </header>
-
-  </div>
-
-</nav>
+<nav th:replace="~{fragments/nav}"></nav>
 
 <main class="tickets-view-main">
   <table th:object="${ticketViewDTO}" >

@@ -14,21 +14,22 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception{
         return httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers((PathRequest.toStaticResources().atCommonLocations())).permitAll()
-                        .requestMatchers("/","/login","/users/register").permitAll()
+                        .requestMatchers("/","/users/login","/users/register","/ticket-submit","/login-error").permitAll()
                         .requestMatchers("/tickets/**").hasRole(RolesEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin ->{
-                    formLogin.loginPage("/login")
+                    formLogin.loginPage("/users/login")
                             .usernameParameter("email")
                             .passwordParameter("password")
-                            .defaultSuccessUrl("/")
-                            .failureForwardUrl("/");
+                            .defaultSuccessUrl("/ticket-submit")
+                            .failureForwardUrl("/login-error");
                 }
         ).logout(
                 logout ->{
@@ -39,9 +40,10 @@ public class SecurityConfig {
                 }
         ).build();
     }
-
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
+        // This service translates the mobilele users and roles
+        // to representation which spring security understands.
         return new UserDetailsServiceImpl(userRepository);
     }
     @Bean

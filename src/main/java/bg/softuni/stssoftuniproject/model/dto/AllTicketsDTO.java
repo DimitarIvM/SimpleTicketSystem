@@ -9,6 +9,7 @@ public class AllTicketsDTO {
 
   private   Set<TicketDTO> tickets;
 
+
     public Set<TicketDTO> getTickets() {
         return tickets;
     }

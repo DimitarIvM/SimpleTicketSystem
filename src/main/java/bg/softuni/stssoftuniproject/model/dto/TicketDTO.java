@@ -21,6 +21,10 @@ public class TicketDTO {
 
     private UserEntity client;
 
+    public UserEntity getClient() {
+        return client;
+    }
+
     public void setClient(UserEntity client) {
         this.client = client;
     }

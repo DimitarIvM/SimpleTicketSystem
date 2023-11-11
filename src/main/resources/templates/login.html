@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:fragment="head">
-    <meta charset="UTF-8">
-    <title>STS</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<head th:replace="~{fragments/head}">
 </head>
 <body>
 <nav th:replace="~{fragments/nav}"></nav>
@@ -35,6 +29,9 @@
 
             </div>
 
+            <p th:if="${bad_credentials}" class="errors alert alert-danger">
+                Invalid username or password.
+            </p>
         <div class="button-wrapper">
             <button type="submit"  class="main-button" value="Register">Submit</button>
         </div>

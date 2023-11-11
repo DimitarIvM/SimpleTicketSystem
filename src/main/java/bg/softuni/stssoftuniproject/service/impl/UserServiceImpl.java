@@ -8,10 +8,15 @@ import bg.softuni.stssoftuniproject.repository.UserRepository;
 import bg.softuni.stssoftuniproject.service.RoleService;
 import bg.softuni.stssoftuniproject.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -41,6 +46,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserEntity getLoggedUser(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String name = authentication.getName();
+
+        Optional<UserEntity> byEmail = this.userRepository.findByEmail(name);
+        return byEmail.orElseThrow();
+    }
+    @Override
     public void register(UserRegisterDTO userRegisterDTO) {
 
 
@@ -64,6 +77,11 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
 
+    }
+
+    @Override
+    public UserEntity findByEmail(String name) {
+        return this.userRepository.findByEmail(name).get();
     }
 
 

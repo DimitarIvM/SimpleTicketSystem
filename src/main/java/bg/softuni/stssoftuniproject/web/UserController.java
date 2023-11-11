@@ -4,6 +4,7 @@ import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +31,16 @@ public class UserController {
 
     }
 
+    @PostMapping("/users/login-error")
+    public String onFailure(
+            @ModelAttribute("email") String email,
+            Model model) {
 
+        model.addAttribute("email", email);
+        model.addAttribute("bad_credentials", "true");
+
+        return "login";
+    }
     @GetMapping("/register")
     public ModelAndView register() {
 

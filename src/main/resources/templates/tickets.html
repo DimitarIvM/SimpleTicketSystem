@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>STS</title>
@@ -7,25 +8,25 @@
 <body>
 
 <nav th:replace="~{fragments/nav}"></nav>
-
-<table th:object="${allTickets}" >
+<main class="tickets-view-main"> <table th:object="${allTicketsForUser}" >
     <thead >
     <td > Ticket Number:</td>
-    <td> Client name: </td>
-    <td> Ticket Owner: </td>
     <td> Subject: </td>
+    <td> Details: </td>
     <td> Created on: </td>
 
     </thead>
-    <tr th:each="ticket: ${allTickets.getTickets()}" >
+    <tr th:each="ticket: ${allTicketsForUser.getTickets()}" >
         <td th:text="${ticket.id}"> your data row row 2 column 1</td>
-        <td  th:text="${ticket.client.email}"> your data row row 2 column 2</td>
-        <td th:text="${ticket.subject}"> your data row row 2 column 3</td>
-        <td th:text="${ticket.created}"> your data row row 2 column 3</td>
+        <td th:text="${ticket.subject}" >  </td>
+        <td ><a class="td-details" th:href="@{/ticket/{id} (id=${ticket.id})}"> Details </a>   </td>
+        <td th:text="${#temporals.format(ticket.created, 'dd-MM-yyyy HH:mm')}"> your data row row 2 column 3</td>
 
     </tr>
 </table>
+</main>
 
+<footer th:replace="~{/fragments/footer}"></footer>
 
 </body>
 </html>

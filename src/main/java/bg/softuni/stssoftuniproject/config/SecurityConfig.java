@@ -20,15 +20,16 @@ public class SecurityConfig {
         return httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers((PathRequest.toStaticResources().atCommonLocations())).permitAll()
-                        .requestMatchers("/","/users/login","/users/register","/ticket-submit","/login-error").permitAll()
-                        .requestMatchers("/tickets/**").hasRole(RolesEnum.ADMIN.name())
+                        .requestMatchers("/","/users/login","/users/register","/ticket-submit","/users/login-error").permitAll()
+                        .requestMatchers("/ticket/{id}","/tickets/all").hasRole(RolesEnum.ADMIN.name())
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin ->{
                     formLogin.loginPage("/users/login")
                             .usernameParameter("email")
                             .passwordParameter("password")
-                            .defaultSuccessUrl("/ticket-submit")
+                            .defaultSuccessUrl("/")
                             .failureForwardUrl("/login-error");
                 }
         ).logout(
@@ -42,8 +43,7 @@ public class SecurityConfig {
     }
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
-        // This service translates the mobilele users and roles
-        // to representation which spring security understands.
+
         return new UserDetailsServiceImpl(userRepository);
     }
     @Bean

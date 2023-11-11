@@ -47,7 +47,7 @@ header .nav ul{
     list-style-type: none;
     gap:40px;
     background-color: transparent;
-
+    align-items: center;
 }
 
 
@@ -312,10 +312,17 @@ body > main > form > div.button-holder.d-flex.justify-content-center {
 
 }
 
-.error{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 20px;
-    font-size: 50px;
+
+.main-name{
+    margin-bottom: 10px;
+    color: white;
+    font-size: large;
+}
+
+.td-details{
+  color: black;
+}
+
+.logout-button{
+    padding: 8px 6px;
 }

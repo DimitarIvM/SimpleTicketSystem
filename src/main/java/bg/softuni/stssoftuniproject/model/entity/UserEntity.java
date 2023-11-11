@@ -18,7 +18,7 @@ public class UserEntity extends BaseEntity {
 
     @Column(nullable = false)
     private String password;
-    @OneToMany(mappedBy = "ticketAssignee")
+    @OneToMany(mappedBy = "ticketAssignee",fetch = FetchType.EAGER)
     private Set<Ticket> tickets;
 
 

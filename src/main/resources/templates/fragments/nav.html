@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/head}">
 
 </head>
@@ -16,24 +17,24 @@
 
          </div>
 
-         <nav class="nav">
+         <nav class="nav" >
              <ul>
+                 <li sec:authorize="hasRole('ADMIN')" >   <a th:href="@{/tickets/all}"> All Tickets </a></li>
+                 <li sec:authorize="isAuthenticated()" >   <a th:href="@{/tickets}"> My Tickets </a></li>
 
-                 <li >  <a th:href="@{/tickets/{id}}"> My Tickets </a>
-                 </li>
 
-                 <li>
+                 <li sec:authorize="isAuthenticated()">
                      <a th:href="@{/ticket-submit}"> Submit Ticket </a>
                  </li>
 
-                 <li > <a th:href="@{/users/login}"> Login </a></li>
+                 <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/login}"> Login </a></li>
 
-                 <li >  <a th:href="@{/users/register}"> Register </a>
+                 <li sec:authorize="!isAuthenticated()" >  <a th:href="@{/users/register}"> Register </a>
                  </li>
                  <li >
-                 <form th:method="post"
+                 <form  th:method="post"
                        th:action="@{/logout}">
-                  <button type="submit" th:href="@{/logout}"> Logout </button>
+                  <button sec:authorize="isAuthenticated()" type="submit" class="logout-button" th:href="@{/logout}"> Logout </button>
                      </form>
                  </li>
 

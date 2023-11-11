@@ -19,8 +19,9 @@
 
         <span class="welcome"> Welcome To</span>
         <span class="STS"> STS</span>
+        <span sec:authorize="isAuthenticated()"  class="main-name" sec:authentication="name"> STS</span>
     
-        <a class="main-button" th:href="@{/users/register}" > Get Started </a>
+        <a sec:authorize="!isAuthenticated()" class="main-button" th:href="@{/users/register}" > Get Started </a>
     </div>
 
     <div class="cards">

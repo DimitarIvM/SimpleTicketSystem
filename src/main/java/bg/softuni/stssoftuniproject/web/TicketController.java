@@ -1,9 +1,11 @@
 package bg.softuni.stssoftuniproject.web;
 
-import bg.softuni.stssoftuniproject.model.dto.AllTicketsDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketViewDTO;
+import bg.softuni.stssoftuniproject.model.dto.*;
+import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 import bg.softuni.stssoftuniproject.service.TicketService;
+import bg.softuni.stssoftuniproject.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,22 +17,38 @@ import org.springframework.web.servlet.ModelAndView;
 public class TicketController {
 
     private final TicketService ticketService;
+    private final UserService userService;
 
-    public TicketController(TicketService ticketService) {
+    public TicketController(TicketService ticketService, UserService userService) {
         this.ticketService = ticketService;
+        this.userService = userService;
     }
 
-
-
-    @GetMapping("/tickets/{id}")
-    public ModelAndView getAllTicketsForEmployee(@PathVariable("id")Long id){
+    @GetMapping("/tickets/all")
+    public ModelAndView getAllTickets(){
         ModelAndView mv = new ModelAndView();
 
-        AllTicketsDTO allTicketsDTO = this.ticketService.getAllById(id);
+        mv.setViewName("all-tickets");
+
+        AllTicketsDTO allAvailableTicketsDTO = ticketService.getAllAvailableTickets();
+
+        mv.addObject("allAvailableTicketsDTO",allAvailableTicketsDTO);
+
+        return mv;
+
+
+    }
+
+    @GetMapping("/tickets")
+    public ModelAndView getAllTicketsForUser(){
+        ModelAndView mv = new ModelAndView();
+
+        AllTicketsDTO allTicketsDTO = this.ticketService.getAllById(userService.getLoggedUser().getId());
+
 
         mv.setViewName("tickets");
 
-        mv.addObject("allTickets",allTicketsDTO);
+        mv.addObject("allTicketsForUser",allTicketsDTO);
 
         return mv;
 
@@ -71,11 +89,12 @@ public ModelAndView viewTicketForEmployee(@PathVariable("id") Long id){
     }
 
     @PostMapping("/ticket/{id}")
-    public ModelAndView postTicket(@PathVariable("id") TicketViewDTO ticketViewDTO){
+    public ModelAndView postTicket(@PathVariable("id") Long ticketId){
 
         ModelAndView mv = new ModelAndView();
 
         mv.setViewName("ticket-view");
+        TicketViewDTO  ticketViewDTO = ticketService.getTicketById(ticketId);
 
 
        this.ticketService.saveNotes(ticketViewDTO);

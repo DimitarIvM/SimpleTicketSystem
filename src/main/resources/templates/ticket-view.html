@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
   <meta charset="UTF-8">
   <title>STS</title>
@@ -19,7 +20,6 @@
 
 
     <td > Ticket Number:</td>
-    <td> Client name: </td>
     <td> Ticket Owner: </td>
     <td> Subject: </td>
     <td> Created on: </td>
@@ -27,7 +27,6 @@
     </thead>
     <tr>
       <td th:text="${ticketViewDTO.id}"> your data row row 2 column 1</td>
-      <td  th:text="${ticketViewDTO.firstName}"> your data row row 2 column 2</td>
       <td th:text="${ticketViewDTO.owner}"> your data row row 2 column 3</td>
       <td th:text="${ticketViewDTO.subject}"> your data row row 2 column 3</td>
       <td th:text="${ticketViewDTO.created}"> your data row row 2 column 3</td>
@@ -36,11 +35,17 @@
   </table>
 
   <label for="Description"> Description</label>
-  <textarea id="Description"   th:text="${ticketViewDTO.description}"></textarea>
+  <div id="Description"   th:text="${ticketViewDTO.description}">
 
-  <form th:method="post" th:action="@{/ticket/{id} (id = ${ticketViewDTO.id})}">
+
+  </div>
+  <label th:if="${ticketViewDTO.notes != null}"  for="Notes"> Notes</label>
+  <div  th:if="${ticketViewDTO.notes != null}"   th:text="${ticketViewDTO.notes}">
+  </div>
+
+  <form sec:authorize="hasRole('ADMIN')" th:method="post" th:action="@{/ticket/{id} (id = ${ticketViewDTO.id})}">
     <label for="notes" >Notes </label>
-    <textarea th:field="*{ticketViewDTO.notes}" name="notes" id="notes" ></textarea>
+    <textarea th:modelAttribute="notes" th:field="*{ticketViewDTO.notes}" name="notes" id="Notes" ></textarea>
     <button class="main-button" type="submit">Save</button>
   </form>
 </main>

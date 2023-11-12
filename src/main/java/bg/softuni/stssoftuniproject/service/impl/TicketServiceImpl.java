@@ -1,18 +1,19 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
-import bg.softuni.stssoftuniproject.model.dto.AllTicketsDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketViewDTO;
+import bg.softuni.stssoftuniproject.model.dto.*;
+import bg.softuni.stssoftuniproject.model.entity.Priority;
+import bg.softuni.stssoftuniproject.model.entity.Product;
 import bg.softuni.stssoftuniproject.model.entity.Ticket;
 import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 import bg.softuni.stssoftuniproject.repository.TicketRepository;
+import bg.softuni.stssoftuniproject.service.PriorityService;
+import bg.softuni.stssoftuniproject.service.ProductService;
 import bg.softuni.stssoftuniproject.service.TicketService;
 import bg.softuni.stssoftuniproject.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -21,13 +22,18 @@ import java.util.Set;
 public class TicketServiceImpl implements TicketService {
     private final TicketRepository ticketRepository;
 
+    private final PriorityService priorityService;
     private final UserService userService;
+
+    private final ProductService productService;
 
     private final ModelMapper modelMapper;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, UserService userService, ModelMapper modelMapper) {
+    public TicketServiceImpl(TicketRepository ticketRepository, PriorityService priorityService, UserService userService, ProductService productService, ModelMapper modelMapper) {
         this.ticketRepository = ticketRepository;
+        this.priorityService = priorityService;
         this.userService = userService;
+        this.productService = productService;
 
 
         this.modelMapper = modelMapper;
@@ -74,18 +80,6 @@ public class TicketServiceImpl implements TicketService {
 
     }
 
-    @Override
-    public void saveNotes(TicketViewDTO ticketViewDTO) {
-
-        Ticket ticket = this.findById(ticketViewDTO.getId());
-
-        if (ticketViewDTO.getNotes() != null) {
-            ticket.setNotes(ticketViewDTO.getNotes());
-        }
-
-
-        this.ticketRepository.save(ticket);
-    }
 
     @Override
     public AllTicketsDTO getAllAvailableTickets() {
@@ -106,9 +100,29 @@ public class TicketServiceImpl implements TicketService {
         return allTicketsDTO;
     }
 
-
-    private Ticket findById(Long id) {
+@Override
+    public Ticket findById(Long id) {
         return this.ticketRepository.findById(id).isPresent() ? this.ticketRepository.findById(id).get() : null;
+    }
+
+    @Override
+    public void saveAnswer(TicketAnswerDTO ticketAnswerDTO) {
+
+        Ticket ticketEntity = this.findById(ticketAnswerDTO.getId());
+
+        Priority priority = this.priorityService.findByName(ticketAnswerDTO.getPriority().getName());
+
+        Set<Product> products = this.productService.findAllBySerialNumber(ticketAnswerDTO.getProduct());
+        UserEntity assignee = this.userService.findByEmail(ticketAnswerDTO.getAssignee());
+
+        ticketEntity.setNotes(ticketAnswerDTO.getNotes());
+        ticketEntity.setModified(LocalDateTime.now());
+        ticketEntity.setPriority(priority);
+        ticketEntity.setTicketAssignee(assignee);
+        ticketEntity.setProduct(products);
+
+        ticketRepository.save(ticketEntity);
+
     }
 
 

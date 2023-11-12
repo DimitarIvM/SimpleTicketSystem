@@ -1,5 +1,6 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
+
 import java.time.LocalDateTime;
 
 public class TicketViewDTO {
@@ -14,23 +15,17 @@ public class TicketViewDTO {
         this.id = id;
     }
 
-    private String firstName;
+
     private String subject;
-    private String created;
-    private String priority;
+    private LocalDateTime created;
+
     private String owner;
 
     private String description;
 
     private String notes;
 
-    public String getFirstName() {
-        return firstName;
-    }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
 
     public String getSubject() {
         return subject;
@@ -40,21 +35,14 @@ public class TicketViewDTO {
         this.subject = subject;
     }
 
-    public String getCreated() {
+    public LocalDateTime getCreated() {
         return created;
     }
 
-    public void setCreated(String created) {
+    public void setCreated(LocalDateTime created) {
         this.created = created;
     }
 
-    public String getPriority() {
-        return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
-    }
 
     public String getOwner() {
         return owner;

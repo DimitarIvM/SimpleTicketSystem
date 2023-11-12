@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>STS All Products</title>
+</head>
+<body>
+
+<nav th:replace="~{fragments/nav}"></nav>
+
+<main class="tickets-view-main">
+
+    <table th:object="${AllProductsDTO}" >
+    <thead  >
+    <td > Product Name:</td>
+    <td>  Serial Number: </td>
+    <td> Part Number: </td>
+
+    <td> Created on: </td>
+
+    </thead>
+    <tr th:each="product :${AllProductsDTO.getProducts()}" >
+        <td th:text="${product.productName}" > </td>
+        <td th:text="${product.serialNumber}" >  </td>
+        <td th:text="${product.partNumber}"> </td>
+
+
+
+    </tr>
+</table>
+</main>
+
+<footer th:replace="~{fragments/footer}"></footer>
+
+</body>
+</html>

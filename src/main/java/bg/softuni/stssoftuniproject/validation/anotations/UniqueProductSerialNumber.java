@@ -1,19 +1,18 @@
 package bg.softuni.stssoftuniproject.validation.anotations;
 
-
-import bg.softuni.stssoftuniproject.validation.ProductExistsValidator;
 import bg.softuni.stssoftuniproject.validation.UniqueEmailValidator;
+import bg.softuni.stssoftuniproject.validation.UniqueProductSerialNumberValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = UniqueEmailValidator.class)
+@Constraint(validatedBy = UniqueProductSerialNumberValidator.class)
 @Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UniqueEmail {
-    String message() default "Email already exist";
+public @interface UniqueProductSerialNumber {
+    String message() default "Product already exists";
 
     Class<?>[] groups() default {};
 

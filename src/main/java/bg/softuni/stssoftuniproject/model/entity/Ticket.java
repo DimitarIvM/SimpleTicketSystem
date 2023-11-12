@@ -34,6 +34,28 @@ public class Ticket  extends BaseEntity{
     @OneToOne
     private Priority priority;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "tickets_products",
+            joinColumns = @JoinColumn(
+                    name = "ticket_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "product_id",
+                    referencedColumnName = "id"
+            )
+    )
+    private Set<Product> products;
+
+    public  Set<Product> getProduct() {
+        return products;
+    }
+
+    public void setProduct( Set<Product> producst) {
+        this.products = products;
+    }
+
     public String getNotes() {
         return notes;
     }

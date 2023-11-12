@@ -1,8 +1,10 @@
 package bg.softuni.stssoftuniproject.service;
 
 import bg.softuni.stssoftuniproject.model.dto.AllTicketsDTO;
+import bg.softuni.stssoftuniproject.model.dto.TicketAnswerDTO;
 import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
 import bg.softuni.stssoftuniproject.model.dto.TicketViewDTO;
+import bg.softuni.stssoftuniproject.model.entity.Ticket;
 
 public interface TicketService {
     void submitTicket(TicketSubmitDTO ticketSubmitDTO);
@@ -11,8 +13,12 @@ public interface TicketService {
 
     AllTicketsDTO getAllById(Long id);
 
-    void saveNotes(TicketViewDTO ticketViewDTO);
+
 
 
     AllTicketsDTO getAllAvailableTickets();
+
+    Ticket findById(Long id);
+
+    void saveAnswer(TicketAnswerDTO ticketAnswerDTO);
 }

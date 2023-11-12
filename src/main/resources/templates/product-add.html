@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>STS Add Product</title>
+</head>
+<body>
+
+<nav th:replace="~{fragments/nav}"></nav>
+
+<main class="tickets-view-main">
+    <form class="form-submit-ticket" th:action="@{/products/add}"
+          th:method="post"
+          th:object="${addProductDTO}">
+
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="serialNumber" class="h4 mb-2">Serial Number</label>
+            </div>
+            <input th:field="*{serialNumber}" th:errorclass="'is-invalid alert-danger'"
+                   type="text" class="form-control" id="serialNumber" name="serialNumber"/>
+            <small th:errors="*{serialNumber}"
+                   th:if="${#fields.hasErrors('serialNumber')}" class="invalid-feedback text-danger">First name error message</small>
+        </div>
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="partNumber" class="h4 mb-2">Part Number</label>
+            </div>
+            <input th:field="*{partNumber}" th:errorclass="'is-invalid alert-danger'"
+                   type="text" class="form-control" id="partNumber" name="partNumber"/>
+            <small th:errors="*{partNumber}"
+                   th:if="${#fields.hasErrors('partNumber')}" class="invalid-feedback text-danger">Email error message</small>
+        </div>
+
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label for="productName" class="h4 mb-2">Product Name</label>
+            </div>
+            <input th:field="*{productName}" th:errorclass="'is-invalid alert-danger'"
+                   type="text" class="form-control" id="productName" name="productName"/>
+            <small th:errors="*{productName}"
+                   th:if="${#fields.hasErrors('productName')}" class="invalid-feedback text-danger">Email error message</small>
+        </div>
+
+
+
+        <div class="button-wrapper">
+            <button type="submit" class="main-button" value="Save">Save</button>
+        </div>
+
+    </form>
+</main>
+
+<footer th:replace="~{fragments/footer}"></footer>
+
+</body>
+</html>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
     <title>STS</title>
@@ -8,11 +9,13 @@
 <body>
 
 <nav th:replace="~{fragments/nav}"></nav>
-<main class="tickets-view-main"> <table th:object="${allTicketsForUser}" >
+<main class="tickets-view-main">
+    <table th:object="${allTicketsForUser}" >
     <thead >
     <td > Ticket Number:</td>
     <td> Subject: </td>
     <td> Details: </td>
+    <td sec:authorize="hasRole('ADMIN')"> Answer Ticket: </td>
     <td> Created on: </td>
 
     </thead>
@@ -20,6 +23,7 @@
         <td th:text="${ticket.id}"> your data row row 2 column 1</td>
         <td th:text="${ticket.subject}" >  </td>
         <td ><a class="td-details" th:href="@{/ticket/{id} (id=${ticket.id})}"> Details </a>   </td>
+        <td  sec:authorize="hasRole('ADMIN')" ><a class="td-details" th:href="@{/ticket/answer/{id} (id=${ticket.id})}"> Answer ticket </a>   </td>
         <td th:text="${#temporals.format(ticket.created, 'dd-MM-yyyy HH:mm')}"> your data row row 2 column 3</td>
 
     </tr>

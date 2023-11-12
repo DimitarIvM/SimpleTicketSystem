@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:fragment="head">
+  <meta charset="UTF-8">
+  <title>STS</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+
+<nav th:replace="~{fragments/nav}"></nav>
+
+<main class="ticket-handle-admin" th:object="${ticketViewDTO}">
+
+  <table  >
+    <thead>
+
+    <td > Ticket Number:</td>
+    <td> Ticket Owner: </td>
+    <td> Subject: </td>
+    <td> Created on: </td>
+
+    </thead>
+    <tr>
+      <td th:text="${ticketViewDTO.id}"> your data row row 2 column 1</td>
+      <td th:text="${ticketViewDTO.owner}"> your data row row 2 column 3</td>
+      <td th:text="${ticketViewDTO.subject}"> your data row row 2 column 3</td>
+      <td th:text="${#temporals.format(ticketViewDTO.created, 'dd-MM-yyyy HH:mm')}"> your data row row 2 column 3</td>
+
+    </tr>
+  </table>
+
+  <label for="Description"> Description</label>
+  <div id="Description"   th:text="${ticketViewDTO.description}">
+
+
+  </div>
+  <label th:if="${ticketViewDTO.notes != null}"  for="Notes"> Notes</label>
+  <div  th:if="${ticketViewDTO.notes != null}"   th:text="${ticketViewDTO.notes}">
+  </div>
+
+  <form class="form-submit-ticket"  th:method="post" th:action="@{/ticket/answer/{id} (id = ${ticketAnswerDTO.id})}" th:object="ticketAnswerDTO">
+    <label for="notes" >Notes </label>
+    <textarea th:modelAttribute="notes" th:field="*{ticketAnswerDTO.notes}" name="notes" id="Notes" ></textarea>
+
+
+    <label class="p-2" for="priority">Categories:</label>
+    <input
+            th:each="p: ${T(bg.softuni.stssoftuniproject.model.enums).values()}"
+            class="m-3" type="checkbox"
+            name="priority"
+            id="priority"
+            th:value="${p}"  th:text="${p}">
+
+    <label for="assignee">Assign to:</label>
+    <input type="text" name="assignee" id="assignee">
+
+    <label for="product">Product:</label>
+    <input type="text" name="product" id="product">
+
+    <button class="main-button" type="submit">Save</button>
+  </form>
+</main>
+
+<footer th:fragment="footer" class="footer">
+
+  <div class="footer-logo">
+    <a href="/static"> Simple Ticket System</a></div>
+
+  <div class="social"> Follow us on
+    <ul >
+      <li><i class="fab fa-instagram"></i></li>
+      <li><i class="fab fa-facebook-f"></i></li>
+      <li><i class="fab fa-twitter"></i></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

@@ -20,9 +20,15 @@ public class SecurityConfig {
         return httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
                         .requestMatchers((PathRequest.toStaticResources().atCommonLocations())).permitAll()
-                        .requestMatchers("/","/users/login","/users/register","/ticket-submit","/users/login-error").permitAll()
-                        .requestMatchers("/ticket/{id}","/tickets/all").hasRole(RolesEnum.ADMIN.name())
-                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/",
+                                "/users/login",
+                                "/users/register",
+                                "/ticket-submit",
+                                "/users/login-error",
+                                "ticket/{id}")
+                                                 .permitAll()
+                        .requestMatchers("/tickets/all","/products/all","/products/add","/ticket/answer/{id}")
+                                                    .hasRole(RolesEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(
                 formLogin ->{

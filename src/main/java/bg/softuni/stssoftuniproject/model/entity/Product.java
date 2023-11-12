@@ -1,9 +1,8 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -18,29 +17,18 @@ public class Product  extends BaseEntity {
     @Column(nullable = false,unique = true)
     private String serialNumber;
 
-    @ManyToOne
-    private Ticket ticket;
-    @ManyToOne
-    private UserEntity client;
+    @ManyToMany(mappedBy = "products")
+    private Set<Ticket>
+            tickets;
 
-    public Ticket getTicket() {
-        return ticket;
+
+    public Set<Ticket> getTicket() {
+        return tickets;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void setTicket(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
-
-    public UserEntity getClient() {
-        return client;
-    }
-
-    public void setClient(UserEntity client) {
-        this.client = client;
-    }
-
-
-
 
 
     public String getProductName() {

@@ -9,6 +9,7 @@ import bg.softuni.stssoftuniproject.service.ProductService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +37,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void save(AddProductDTO addProductDTO) {
+
+        addProductDTO.setCreated(LocalDateTime.now());
 
         this.productRepository.save(modelMapper.map(addProductDTO,Product.class));
 

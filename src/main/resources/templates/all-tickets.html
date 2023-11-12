@@ -20,6 +20,7 @@
     <td> Submitted by: </td>
     <td> Subject: </td>
     <td> Details: </td>
+    <td sec:authorize="hasRole('ADMIN')"> Answer Ticket: </td>
     <td> Created on: </td>
 
     </thead>
@@ -28,6 +29,7 @@
       <td th:text="${ticket.client.email}"> your data row row 2 column 3</td>
       <td th:text="${ticket.subject}"> your data row row 2 column 3</td>
       <td ><a class="td-details" th:href="@{/ticket/{id} (id=${ticket.id})}"> Details </a>   </td>
+      <td  sec:authorize="hasRole('ADMIN')" ><a class="td-details" th:href="@{/ticket/answer/{id} (id=${ticket.id})}"> Answer ticket </a>   </td>
       <td th:text="${ticket.created}"> your data row row 2 column 3</td>
 
     </tr>

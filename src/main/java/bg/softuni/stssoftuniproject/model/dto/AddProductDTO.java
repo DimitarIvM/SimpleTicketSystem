@@ -4,6 +4,8 @@ import bg.softuni.stssoftuniproject.validation.anotations.UniqueProductSerialNum
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDateTime;
+
 
 public class AddProductDTO {
 
@@ -15,6 +17,16 @@ public class AddProductDTO {
     @NotNull (message = "Serial number cannot be null")
     private String serialNumber;
     private String partNumber;
+
+    public LocalDateTime created;
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
 
     public String getProductName() {
         return productName;

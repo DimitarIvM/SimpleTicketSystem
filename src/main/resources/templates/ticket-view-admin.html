@@ -43,18 +43,23 @@
   <div  th:if="${ticketViewDTO.notes != null}"   th:text="${ticketViewDTO.notes}">
   </div>
 
-  <form class="form-submit-ticket"  th:method="post" th:action="@{/ticket/answer/{id} (id = ${ticketAnswerDTO.id})}" th:object="ticketAnswerDTO">
+  <form class="form-submit-ticket"  th:method="post" th:action="@{/ticket/answer/{id} (id=${ticketViewDTO.id})}" th:object="${ticketAnswerDTO}">
     <label for="notes" >Notes </label>
-    <textarea th:modelAttribute="notes" th:field="*{ticketAnswerDTO.notes}" name="notes" id="Notes" ></textarea>
+    <textarea th:modelAttribute="notes" th:field="${ticketAnswerDTO.notes}" name="notes" id="notes" ></textarea>
 
 
-    <label class="p-2" for="priority">Categories:</label>
-    <input
-            th:each="p: ${T(bg.softuni.stssoftuniproject.model.enums).values()}"
-            class="m-3" type="checkbox"
-            name="priority"
-            id="priority"
-            th:value="${p}"  th:text="${p}">
+    <div class="form-group">
+      <label for="level">Priority</label>
+      <select id="level" name="level" class="custom-select"
+              th:field="*{priority}">
+        <option value="" selected disabled>Select level</option>
+        <option th:each="priority : ${T(bg.softuni.stssoftuniproject.model.enums.PriorityEnum).values()}"
+                th:value="${priority}"
+                th:text="${priority}">
+          Select level
+        </option>
+      </select>
+    </div>
 
     <label for="assignee">Assign to:</label>
     <input type="text" name="assignee" id="assignee">

@@ -55,7 +55,7 @@ public class ProductController {
         }
 
         productService.save(addProductDTO);
-        return new ModelAndView("products-all");
+        return new ModelAndView("redirect:/products/all");
     }
 
     @ModelAttribute

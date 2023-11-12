@@ -110,7 +110,7 @@ public class TicketServiceImpl implements TicketService {
 
         Ticket ticketEntity = this.findById(ticketAnswerDTO.getId());
 
-        Priority priority = this.priorityService.findByName(ticketAnswerDTO.getPriority().getName());
+        Priority priority = this.priorityService.findByName(ticketAnswerDTO.getPriority());
 
         Set<Product> products = this.productService.findAllBySerialNumber(ticketAnswerDTO.getProduct());
         UserEntity assignee = this.userService.findByEmail(ticketAnswerDTO.getAssignee());

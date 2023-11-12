@@ -17,14 +17,14 @@
     <td > Product Name:</td>
     <td>  Serial Number: </td>
     <td> Part Number: </td>
-
     <td> Created on: </td>
 
     </thead>
-    <tr th:each="product :${AllProductsDTO.getProducts()}" >
+    <tr th:each="product :${AllProductsDTO.products}" >
         <td th:text="${product.productName}" > </td>
         <td th:text="${product.serialNumber}" >  </td>
         <td th:text="${product.partNumber}"> </td>
+        <td th:text="${#temporals.format(product.created, 'dd-MM-yyyy HH:mm')}"> </td>
 
 
 

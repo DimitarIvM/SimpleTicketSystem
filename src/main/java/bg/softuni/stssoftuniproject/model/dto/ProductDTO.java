@@ -1,9 +1,20 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
+import java.time.LocalDateTime;
+
 public class ProductDTO {
 
     private String productName;
     private String serialNumber;
+    private LocalDateTime created;
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
 
     public String getProductName() {
         return productName;

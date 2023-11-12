@@ -2,6 +2,7 @@ package bg.softuni.stssoftuniproject.model.entity;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -16,6 +17,25 @@ public class Product  extends BaseEntity {
 
     @Column(nullable = false,unique = true)
     private String serialNumber;
+
+    @Column
+    private LocalDateTime created;
+
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 
     @ManyToMany(mappedBy = "products")
     private Set<Ticket>

@@ -3,6 +3,7 @@ package bg.softuni.stssoftuniproject.model.dto;
 import bg.softuni.stssoftuniproject.model.entity.Priority;
 import bg.softuni.stssoftuniproject.model.entity.Product;
 import bg.softuni.stssoftuniproject.model.entity.UserEntity;
+import bg.softuni.stssoftuniproject.model.enums.PriorityEnum;
 import bg.softuni.stssoftuniproject.validation.anotations.ProductExists;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -24,7 +25,7 @@ public class TicketAnswerDTO {
     private String assignee;
 
     @NotNull
-    private Priority priority;
+    private PriorityEnum priority;
 
     @NotNull
     private String notes;
@@ -41,11 +42,11 @@ public class TicketAnswerDTO {
         this.assignee = assignee;
     }
 
-    public Priority getPriority() {
+    public PriorityEnum getPriority() {
         return priority;
     }
 
-    public void setPriority(Priority priority) {
+    public void setPriority(PriorityEnum priority) {
         this.priority = priority;
     }
 

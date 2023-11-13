@@ -58,6 +58,7 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = this.ticketRepository.findById(id).get();
 
 
+
         return modelMapper.map(ticket, TicketViewDTO.class);
     }
 

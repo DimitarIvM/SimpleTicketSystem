@@ -21,6 +21,10 @@ public class TicketDTO {
 
     private UserEntity client;
 
+
+    private LocalDateTime created;
+
+
     public UserEntity getClient() {
         return client;
     }
@@ -29,7 +33,7 @@ public class TicketDTO {
         this.client = client;
     }
 
-    private LocalDateTime created;
+
 
     public String getSubject() {
         return subject;

@@ -8,7 +8,7 @@
 <body class="body">
 
 
- <nav class="nav" th:fragment="nav">
+ <nav  class="nav" th:fragment="nav">
 
      <div class="hero">
      <header>
@@ -18,7 +18,7 @@
          </div>
 
          <nav class="nav" >
-             <ul>
+             <ul >
                  <li sec:authorize="hasRole('ADMIN')" >   <a th:href="@{/tickets/all}"> All Tickets </a></li>
                  <li sec:authorize="isAuthenticated()" >   <a th:href="@{/tickets}"> My Tickets </a></li>
                  <li sec:authorize="hasRole('ADMIN')" >   <a th:href="@{/products/add}"> Add product </a></li>

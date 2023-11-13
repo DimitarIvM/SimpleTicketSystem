@@ -20,14 +20,14 @@
 
 
     <td > Ticket Number:</td>
-    <td> Ticket Owner: </td>
+
     <td> Subject: </td>
     <td> Created on: </td>
 
     </thead>
     <tr>
       <td th:text="${ticketViewDTO.id}"> your data row row 2 column 1</td>
-      <td th:text="${ticketViewDTO.owner}"> your data row row 2 column 3</td>
+
       <td th:text="${ticketViewDTO.subject}"> your data row row 2 column 3</td>
       <td th:text="${#temporals.format(ticketViewDTO.created, 'dd-MM-yyyy HH:mm')}"> your data row row 2 column 3</td>
 

@@ -52,7 +52,7 @@ public class Ticket  extends BaseEntity{
         return products;
     }
 
-    public void setProduct( Set<Product> producst) {
+    public void setProduct( Set<Product> products) {
         this.products = products;
     }
 

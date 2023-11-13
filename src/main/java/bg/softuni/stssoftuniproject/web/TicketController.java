@@ -36,6 +36,8 @@ public class TicketController {
 
     }
 
+
+
     @GetMapping("/ticket/answer/{id}")
     public ModelAndView answerTicket(@PathVariable("id") Long id){
 
@@ -59,6 +61,8 @@ public class TicketController {
 
         this.ticketService.saveAnswer(ticketAnswerDTO);
 
+        mv.setViewName("redirect:/ticket/{id}");
+
         return mv;
     }
 
@@ -68,10 +72,9 @@ public class TicketController {
 
         AllTicketsDTO allTicketsDTO = this.ticketService.getAllById(userService.getLoggedUser().getId());
 
-
-        mv.setViewName("tickets");
-
+mv.setViewName("tickets");
         mv.addObject("allTicketsForUser",allTicketsDTO);
+
 
         return mv;
 

@@ -326,3 +326,9 @@ body > main > form > div.button-holder.d-flex.justify-content-center {
 .logout-button{
     padding: 8px 6px;
 }
+
+.custom-select{
+    width: 10vw;
+    padding: 5px;
+}
+

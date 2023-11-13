@@ -1,5 +1,6 @@
 package bg.softuni.stssoftuniproject.web;
 
+import bg.softuni.stssoftuniproject.model.dto.AllUsersDTO;
 import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.service.UserService;
 import jakarta.validation.Valid;
@@ -22,6 +23,22 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("/all")
+    public ModelAndView getAllUsers(){
+
+ ModelAndView mv = new ModelAndView();
+
+ AllUsersDTO allUsersDTO = userService.getAllUsers();
+        mv.setViewName("users-all");
+
+ mv.addObject("allUsersDTO",allUsersDTO);
+
+
+
+ return mv;
+
     }
 
     @GetMapping("/login")

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>STS Users</title>
+</head>
+<body>
+<nav th:replace="~{/fragments/nav}"></nav>
+<main class="tickets-view-main">
+<table th:object="${allUsersDTO}" >
+    <thead>
+
+
+    <td > First Name:</td>
+
+    <td> Last Name: </td>
+    <td> Email: </td>
+    <td> Make Admin: </td>
+
+    </thead>
+    <tr th:each=" user: ${allUsersDTO.getUsers()}">
+        <td th:text="${user.firstName}"> your data row row 2 column 1</td>
+
+        <td  th:text="${user.lastName}"> your data row row 2 column 3</td>
+        <td  th:text="${user.email}"> your data row row 2 column 3</td>
+        <td > </td>
+
+    </tr>
+</table>
+
+    </main>
+
+<footer th:replace="~{/fragments/footer}"></footer>
+</body>
+</html>

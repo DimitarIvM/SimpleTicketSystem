@@ -1,5 +1,7 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
+import bg.softuni.stssoftuniproject.model.dto.AllUsersDTO;
+import bg.softuni.stssoftuniproject.model.dto.UserDTO;
 import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.model.entity.Role;
 import bg.softuni.stssoftuniproject.model.entity.UserEntity;
@@ -15,9 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -53,6 +53,26 @@ public class UserServiceImpl implements UserService {
         Optional<UserEntity> byEmail = this.userRepository.findByEmail(name);
         return byEmail.orElseThrow();
     }
+
+    @Override
+    public AllUsersDTO getAllUsers() {
+
+        AllUsersDTO allUsersDTO =new AllUsersDTO();
+
+        List<UserEntity> all = userRepository.findAll();
+        Set<UserDTO> userDTOS = new HashSet<>();
+
+        for (UserEntity userEntity : all) {
+
+            userDTOS.add(modelMapper.map(userEntity,UserDTO.class));
+
+        }
+
+        allUsersDTO.setUsers(userDTOS);
+
+        return allUsersDTO;
+    }
+
     @Override
     public void register(UserRegisterDTO userRegisterDTO) {
 

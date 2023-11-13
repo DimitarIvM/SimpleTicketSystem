@@ -25,9 +25,12 @@
                  <li sec:authorize="hasRole('ADMIN')" >   <a th:href="@{/products/all}"> All products </a></li>
 
 
+
                  <li sec:authorize="isAuthenticated()">
                      <a th:href="@{/ticket-submit}"> Submit Ticket </a>
                  </li>
+
+                 <li sec:authorize="hasRole('ADMIN')" >   <a th:href="@{/users/all}"> All users </a></li>
 
                  <li sec:authorize="!isAuthenticated()"> <a th:href="@{/users/login}"> Login </a></li>
 

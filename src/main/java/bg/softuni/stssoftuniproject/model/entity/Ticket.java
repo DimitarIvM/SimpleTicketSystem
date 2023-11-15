@@ -34,7 +34,7 @@ public class Ticket  extends BaseEntity{
     @OneToOne
     private Priority priority;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Product.class,fetch = FetchType.EAGER)
     @JoinTable(
             name = "tickets_products",
             joinColumns = @JoinColumn(

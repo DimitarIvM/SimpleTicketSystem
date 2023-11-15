@@ -2,6 +2,8 @@ package bg.softuni.stssoftuniproject.model.dto;
 
 import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
 
+import java.util.List;
+
 public class UserDTO {
 
     private Long id;
@@ -30,13 +32,13 @@ public class UserDTO {
         this.email = email;
     }
 
-    public RolesEnum getRole() {
-        return role;
-    }
-
-    public void setRole(RolesEnum role) {
-        this.role = role;
-    }
+//    public List<RolesEnum> getRole() {
+//        return roles;
+//    }
+//
+//    public void setRole(List<RolesEnum> roles) {
+//        this.roles = roles;
+//    }
 
     public String getLastName() {
         return lastName;
@@ -48,6 +50,6 @@ public class UserDTO {
 
     private String firstName;
     private String email;
-    private RolesEnum role;
+//    private List<RolesEnum> roles;
     private String lastName;
 }

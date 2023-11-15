@@ -28,16 +28,7 @@ public class UserController {
     @GetMapping("/all")
     public ModelAndView getAllUsers(){
 
- ModelAndView mv = new ModelAndView();
-
- AllUsersDTO allUsersDTO = userService.getAllUsers();
-        mv.setViewName("users-all");
-
- mv.addObject("allUsersDTO",allUsersDTO);
-
-
-
- return mv;
+ return new ModelAndView("users-all");
 
     }
 

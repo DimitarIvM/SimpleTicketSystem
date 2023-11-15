@@ -55,23 +55,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AllUsersDTO getAllUsers() {
-
-        AllUsersDTO allUsersDTO =new AllUsersDTO();
-
-        List<UserEntity> all = userRepository.findAll();
-        Set<UserDTO> userDTOS = new HashSet<>();
-
-        for (UserEntity userEntity : all) {
-
-            userDTOS.add(modelMapper.map(userEntity,UserDTO.class));
-
-        }
-
-        allUsersDTO.setUsers(userDTOS);
-
-        return allUsersDTO;
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(user -> modelMapper.map(user,UserDTO.class))
+                .toList();
     }
+
+//    @Override
+//    public AllUsersDTO getAllUsers() {
+//
+//        AllUsersDTO allUsersDTO =new AllUsersDTO();
+//
+//        List<UserEntity> all = userRepository.findAll();
+//        Set<UserDTO> userDTOS = new HashSet<>();
+//
+//        for (UserEntity userEntity : all) {
+//
+//            userDTOS.add(modelMapper.map(userEntity,UserDTO.class));
+//
+//        }
+//
+//        allUsersDTO.setUsers(userDTOS);
+//
+//        return allUsersDTO;
+//    }
 
     @Override
     public void register(UserRegisterDTO userRegisterDTO) {

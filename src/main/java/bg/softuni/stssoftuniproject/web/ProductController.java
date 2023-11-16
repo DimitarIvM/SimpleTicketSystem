@@ -23,43 +23,36 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/add")
-    public ModelAndView getAddProductPage(){
-
-        return new ModelAndView("product-add");
-    }
+//    @GetMapping("/add")
+//    public ModelAndView getAddProductPage(){
+//
+//        return new ModelAndView("product-add");
+//    }
 
     @GetMapping("/all")
     public ModelAndView getAllProducts(){
 
-        ModelAndView mv = new ModelAndView();
-
-        AllProductsDTO allProductsDTO = this.productService.getAllProducts();
-
-        mv.setViewName("products-all");
-        mv.addObject("AllProductsDTO",allProductsDTO);
-
-        return mv;
+       return new ModelAndView ("products-all");
     }
 
-    @PostMapping("/add")
-    public ModelAndView postAddProductPage(@Valid AddProductDTO addProductDTO,
-                                           BindingResult bindingResult,
-                                           RedirectAttributes redirectAttributes){
-
-        if (bindingResult.hasErrors()){
-            redirectAttributes.addFlashAttribute("addProductDTO",addProductDTO)
-                    .addFlashAttribute("org.springframework.validation.BindingResult.addProductDTO", bindingResult);
-
-            return new ModelAndView("redirect:/products/add");
-        }
-
-        productService.save(addProductDTO);
-        return new ModelAndView("redirect:/products/all");
-    }
-
-    @ModelAttribute
-    public AddProductDTO addProductDTO(){
-        return new AddProductDTO();
-    }
+//    @PostMapping("/add")
+//    public ModelAndView postAddProductPage(@Valid AddProductDTO addProductDTO,
+//                                           BindingResult bindingResult,
+//                                           RedirectAttributes redirectAttributes){
+//
+//        if (bindingResult.hasErrors()){
+//            redirectAttributes.addFlashAttribute("addProductDTO",addProductDTO)
+//                    .addFlashAttribute("org.springframework.validation.BindingResult.addProductDTO", bindingResult);
+//
+//            return new ModelAndView("redirect:/products/add");
+//        }
+//
+//        productService.save(addProductDTO);
+//        return new ModelAndView("redirect:/products/all");
+//    }
+//
+//    @ModelAttribute
+//    public AddProductDTO addProductDTO(){
+//        return new AddProductDTO();
+//    }
 }

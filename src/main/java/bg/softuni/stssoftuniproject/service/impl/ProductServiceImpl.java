@@ -3,7 +3,9 @@ package bg.softuni.stssoftuniproject.service.impl;
 import bg.softuni.stssoftuniproject.model.dto.AddProductDTO;
 import bg.softuni.stssoftuniproject.model.dto.AllProductsDTO;
 import bg.softuni.stssoftuniproject.model.dto.ProductDTO;
+import bg.softuni.stssoftuniproject.model.dto.UserDTO;
 import bg.softuni.stssoftuniproject.model.entity.Product;
+import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 import bg.softuni.stssoftuniproject.repository.ProductRepository;
 import bg.softuni.stssoftuniproject.service.ProductService;
 import org.modelmapper.ModelMapper;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -45,20 +48,36 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public AllProductsDTO getAllProducts() {
-        AllProductsDTO allProductsDTO = new AllProductsDTO();
-
-        List<Product> all = this.productRepository.findAll();
-
-        Set<ProductDTO> productDTOS = new HashSet<>();
-
-        for (Product product : all) {
-
-            productDTOS.add(modelMapper.map(product, ProductDTO.class));
-        }
-
-        allProductsDTO.setProducts(productDTOS);
-
-        return allProductsDTO;
+    public List<ProductDTO> getAllProducts() {
+        return productRepository.findAll()
+                .stream()
+                .map(product -> modelMapper.map(product,ProductDTO.class))
+                .toList();
     }
+
+    @Override
+    public Optional<ProductDTO> findById(Long id) {
+        Product product = productRepository.findById(id).get();
+
+
+        return Optional.of(modelMapper.map(product,ProductDTO.class));
+    }
+
+//    @Override
+//    public AllProductsDTO getAllProducts() {
+//        AllProductsDTO allProductsDTO = new AllProductsDTO();
+//
+//        List<Product> all = this.productRepository.findAll();
+//
+//        Set<ProductDTO> productDTOS = new HashSet<>();
+//
+//        for (Product product : all) {
+//
+//            productDTOS.add(modelMapper.map(product, ProductDTO.class));
+//        }
+//
+//        allProductsDTO.setProducts(productDTOS);
+//
+//        return allProductsDTO;
+//    }
 }

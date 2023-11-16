@@ -2,36 +2,28 @@
 <html lang="en"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:th="http://www.thymeleaf.org" >
-<head>
-    <meta charset="UTF-8">
-    <title>STS All Products</title>
-</head>
+<head th:replace="~{fragments/head}">
 <body>
 
 <nav th:replace="~{fragments/nav}"></nav>
 
 <main class="tickets-view-main">
+    <button id="loadAllProducts">Load all users</button>
+    <table>
+        <thead>
 
-    <table th:object="${AllProductsDTO}" >
-    <thead  >
-    <td > Product Name:</td>
-    <td>  Serial Number: </td>
-    <td> Part Number: </td>
-    <td> Created on: </td>
-
-    </thead>
-    <tr th:each="product :${AllProductsDTO.products}" >
-        <td th:text="${product.productName}" > </td>
-        <td th:text="${product.serialNumber}" >  </td>
-        <td th:text="${product.partNumber}"> </td>
-        <td th:text="${#temporals.format(product.created, 'dd-MM-yyyy HH:mm')}"> </td>
+        <th > Product Name:</th>
+        <th> Serial Number: </th>
+        <th> Part Number: </th>
 
 
+        </thead>
+        <tbody id="products-table"></tbody>
+    </table>
 
-    </tr>
-</table>
+
 </main>
-
+<script src="/js/products-manager.js"></script>
 <footer th:replace="~{fragments/footer}"></footer>
 
 </body>

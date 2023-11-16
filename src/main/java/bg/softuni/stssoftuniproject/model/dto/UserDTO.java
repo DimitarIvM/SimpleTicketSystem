@@ -1,8 +1,6 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
-import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
 
-import java.util.List;
 
 public class UserDTO {
 
@@ -32,14 +30,6 @@ public class UserDTO {
         this.email = email;
     }
 
-//    public List<RolesEnum> getRole() {
-//        return roles;
-//    }
-//
-//    public void setRole(List<RolesEnum> roles) {
-//        this.roles = roles;
-//    }
-
     public String getLastName() {
         return lastName;
     }
@@ -47,9 +37,7 @@ public class UserDTO {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
     private String firstName;
     private String email;
-//    private List<RolesEnum> roles;
     private String lastName;
 }

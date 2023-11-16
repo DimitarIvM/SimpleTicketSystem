@@ -1,6 +1,5 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
-import bg.softuni.stssoftuniproject.model.dto.AllUsersDTO;
 import bg.softuni.stssoftuniproject.model.dto.UserDTO;
 import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.model.entity.Role;
@@ -12,8 +11,6 @@ import bg.softuni.stssoftuniproject.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -60,6 +57,33 @@ public class UserServiceImpl implements UserService {
                 .stream()
                 .map(user -> modelMapper.map(user,UserDTO.class))
                 .toList();
+    }
+
+//    @Override
+//    public UserDTO makeAdmin(Long id) {
+//
+//        UserEntity userEntity = userRepository.findById(id).get();
+//        List<Role> roles = this.roleService.findAll();
+//        Set<Role> rolseSet = new HashSet<>(roles);
+//
+//
+//
+//         userEntity.setRoles(rolseSet);
+//
+//
+//
+//        userRepository.save(userEntity);
+//
+//       return modelMapper.map(userEntity,UserDTO.class);
+//    }
+
+    @Override
+    public Optional<UserDTO> findById(Long id) {
+
+        UserEntity user = userRepository.findById(id).get();
+
+
+        return Optional.of(modelMapper.map(user,UserDTO.class));
     }
 
 //    @Override

@@ -7,6 +7,9 @@ import bg.softuni.stssoftuniproject.repository.RoleRepository;
 import bg.softuni.stssoftuniproject.service.RoleService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class RoleServiceImpl implements RoleService {
 
@@ -38,5 +41,11 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role findByRoleName(RolesEnum employeeRoleEnum) {
         return this.roleRepository.findByRole(employeeRoleEnum);
+    }
+
+    @Override
+    public List<Role> findAll() {
+
+        return this.roleRepository.findAll();
     }
 }

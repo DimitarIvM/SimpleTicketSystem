@@ -15,18 +15,23 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
 
+
     @Bean
     public SecurityFilterChain filterChain (HttpSecurity httpSecurity) throws Exception{
         return httpSecurity.authorizeHttpRequests(
                 authorizeRequests -> authorizeRequests
+
                         .requestMatchers((PathRequest.toStaticResources().atCommonLocations())).permitAll()
                         .requestMatchers("/",
                                 "/users/login",
                                 "/users/register",
                                 "/ticket-submit",
                                 "/users/login-error",
-                                "ticket/{id}")
+                                "ticket/{id}",
+                                "/error")
                                                  .permitAll()
+
+                        .requestMatchers("/api/products-all").hasRole(RolesEnum.ADMIN.name())
                         .requestMatchers("/tickets/all","/products/all","/products/add","/ticket/answer/{id}")
                                                     .hasRole(RolesEnum.ADMIN.name())
                         .anyRequest().authenticated()
@@ -36,7 +41,7 @@ public class SecurityConfig {
                             .usernameParameter("email")
                             .passwordParameter("password")
                             .defaultSuccessUrl("/")
-                            .failureForwardUrl("/login-error");
+                            .failureForwardUrl("/users/login-error");
                 }
         ).logout(
                 logout ->{

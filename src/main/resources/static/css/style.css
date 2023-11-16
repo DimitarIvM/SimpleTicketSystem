@@ -1,4 +1,4 @@
-@import url("https://use.fontawesome.com/releases/v5.6.3/css/all.css");
+
 
 *{
     margin: 0px;
@@ -332,3 +332,7 @@ body > main > form > div.button-holder.d-flex.justify-content-center {
     padding: 5px;
 }
 
+.loadAllUsers {
+    padding: 5px;
+
+}

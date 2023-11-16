@@ -3,12 +3,11 @@ package bg.softuni.stssoftuniproject.web;
 import bg.softuni.stssoftuniproject.model.dto.UserDTO;
 import bg.softuni.stssoftuniproject.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/users-all")
@@ -24,4 +23,17 @@ public class UsersRestController {
 
         return ResponseEntity.ok(userService.getAllUsers());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> findById(@PathVariable("id") Long id){
+
+        Optional<UserDTO> userDTO =   userService.findById(id);
+
+
+        return userDTO
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+
 }

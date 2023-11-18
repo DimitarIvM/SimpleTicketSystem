@@ -31,8 +31,14 @@ public class SecurityConfig {
                                 "/error")
                                                  .permitAll()
 
-                        .requestMatchers("/api/products-all").hasRole(RolesEnum.ADMIN.name())
-                        .requestMatchers("/tickets/all","/products/all","/products/add","/ticket/answer/{id}")
+                        .requestMatchers("/api/products-all",
+                                "/users/make-admin/{id}")
+                                         .hasRole(RolesEnum.ADMIN.name())
+                        .requestMatchers("/tickets/all",
+                                "/products/all",
+                                "/products/add",
+                                "/ticket/answer/{id}",
+                                "/users/all")
                                                     .hasRole(RolesEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(

@@ -36,7 +36,9 @@
   <div  th:if="${ticketViewDTO.notes != null}"   th:text="${ticketViewDTO.notes}">
   </div>
 
-  <form class="form-submit-ticket"  th:method="post" th:action="@{/ticket/answer/{id} (id=${ticketViewDTO.id})}" th:object="${ticketAnswerDTO}">
+  <form class="form-submit-ticket"
+        th:method="post"
+        th:action="@{/ticket/answer/{id} (id=${ticketViewDTO.id})}" th:object="${ticketAnswerDTO}">
     <label for="notes" >Notes </label>
     <textarea th:modelAttribute="notes" th:field="${ticketAnswerDTO.notes}" name="notes" id="notes" ></textarea>
 

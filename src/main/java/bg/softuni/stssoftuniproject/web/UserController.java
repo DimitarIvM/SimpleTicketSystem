@@ -1,19 +1,20 @@
 package bg.softuni.stssoftuniproject.web;
 
 import bg.softuni.stssoftuniproject.model.dto.AllUsersDTO;
+import bg.softuni.stssoftuniproject.model.dto.UserDTO;
 import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
+import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 import bg.softuni.stssoftuniproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/users")
@@ -26,11 +27,42 @@ public class UserController {
     }
 
     @GetMapping("/all")
-    public ModelAndView getAllUsers(){
+    public ModelAndView getAllUsers() {
 
- return new ModelAndView("users-all");
+
+        ModelAndView mv = new ModelAndView();
+
+        AllUsersDTO allUsersDTO = this.userService.getAllUsers();
+
+        mv.setViewName("users-all");
+        mv.addObject("allUsersDTO", allUsersDTO);
+
+        return mv;
 
     }
+
+    @GetMapping("/users/make-admin/{id}")
+    public ModelAndView getPromoteToAdmin(@PathVariable("id") Long id){
+
+        ModelAndView mv = new ModelAndView();
+
+        UserDTO userDto = new UserDTO();
+        userDto.setId(id);
+
+mv.addObject("userDto",userDto);
+
+        return mv;
+    }
+    @PostMapping("/grant-admin-role")
+    public String grantAdminRole(@RequestParam("userId") Long userId) {
+       Optional <UserEntity> user =    userService.getById(userId);
+
+       this.userService.makeAdmin(user.get());
+
+        return "redirect:/users/all";
+    }
+
+
 
     @GetMapping("/login")
     public ModelAndView login() {
@@ -41,13 +73,12 @@ public class UserController {
 
     @PostMapping("/users/login-error")
     public String onFailure(
-          ) {
-
-
+    ) {
 
 
         return "login";
     }
+
     @GetMapping("/register")
     public ModelAndView register() {
 

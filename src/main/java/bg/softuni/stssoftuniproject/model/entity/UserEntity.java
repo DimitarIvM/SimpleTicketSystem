@@ -1,8 +1,11 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
 
 
+import java.util.Calendar;
+import java.util.Collection;
 import java.util.Set;
 
 @Entity
@@ -92,4 +95,6 @@ public class UserEntity extends BaseEntity {
     public String getFullName(){
         return this.firstName + " " + this.lastName;
     }
+
+
 }

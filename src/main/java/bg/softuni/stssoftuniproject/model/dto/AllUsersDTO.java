@@ -1,16 +1,17 @@
 package bg.softuni.stssoftuniproject.model.dto;
 
+import java.util.List;
 import java.util.Set;
 
 public class AllUsersDTO {
 
-    private Set<UserDTO> users;
+    private List<UserDTO> users;
 
-    public Set<UserDTO> getUsers() {
+    public List<UserDTO> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<UserDTO> users) {
+    public void setUsers(List<UserDTO> users) {
         this.users = users;
     }
 }

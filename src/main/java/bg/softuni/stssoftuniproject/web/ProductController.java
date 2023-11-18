@@ -1,7 +1,6 @@
 package bg.softuni.stssoftuniproject.web;
 
 import bg.softuni.stssoftuniproject.model.dto.AddProductDTO;
-import bg.softuni.stssoftuniproject.model.dto.AllProductsDTO;
 import bg.softuni.stssoftuniproject.service.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 @Controller
 @RequestMapping("/products")
 public class ProductController {
@@ -23,11 +23,11 @@ public class ProductController {
         this.productService = productService;
     }
 
-//    @GetMapping("/add")
-//    public ModelAndView getAddProductPage(){
-//
-//        return new ModelAndView("product-add");
-//    }
+    @GetMapping("/add")
+    public ModelAndView getAddProductPage(){
+
+        return new ModelAndView("product-add");
+    }
 
     @GetMapping("/all")
     public ModelAndView getAllProducts(){
@@ -35,24 +35,24 @@ public class ProductController {
        return new ModelAndView ("products-all");
     }
 
-//    @PostMapping("/add")
-//    public ModelAndView postAddProductPage(@Valid AddProductDTO addProductDTO,
-//                                           BindingResult bindingResult,
-//                                           RedirectAttributes redirectAttributes){
-//
-//        if (bindingResult.hasErrors()){
-//            redirectAttributes.addFlashAttribute("addProductDTO",addProductDTO)
-//                    .addFlashAttribute("org.springframework.validation.BindingResult.addProductDTO", bindingResult);
-//
-//            return new ModelAndView("redirect:/products/add");
-//        }
-//
-//        productService.save(addProductDTO);
-//        return new ModelAndView("redirect:/products/all");
-//    }
-//
-//    @ModelAttribute
-//    public AddProductDTO addProductDTO(){
-//        return new AddProductDTO();
-//    }
+    @PostMapping("/add")
+    public ModelAndView postAddProductPage(@Valid AddProductDTO addProductDTO,
+                                           BindingResult bindingResult,
+                                           RedirectAttributes redirectAttributes){
+
+        if (bindingResult.hasErrors()){
+            redirectAttributes.addFlashAttribute("addProductDTO",addProductDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.addProductDTO", bindingResult);
+
+            return new ModelAndView("redirect:/products/add");
+        }
+
+        productService.save(addProductDTO);
+        return new ModelAndView("redirect:/products/all");
+    }
+
+    @ModelAttribute
+    public AddProductDTO addProductDTO(){
+        return new AddProductDTO();
+    }
 }

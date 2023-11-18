@@ -1,5 +1,6 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
+import bg.softuni.stssoftuniproject.model.dto.AllUsersDTO;
 import bg.softuni.stssoftuniproject.model.dto.UserDTO;
 import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.model.entity.Role;
@@ -10,7 +11,11 @@ import bg.softuni.stssoftuniproject.service.RoleService;
 import bg.softuni.stssoftuniproject.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -52,11 +57,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDTO> getAllUsers() {
-        return userRepository.findAll()
-                .stream()
-                .map(user -> modelMapper.map(user,UserDTO.class))
-                .toList();
+    public AllUsersDTO getAllUsers() {
+
+        AllUsersDTO allUsersDTO = new AllUsersDTO();
+
+        List<UserDTO> usersDTO = new ArrayList<>();
+
+        List<UserEntity> all = this.userRepository.findAll();
+
+        for (UserEntity userEntity : all) {
+
+            usersDTO.add(modelMapper.map(userEntity, UserDTO.class));
+        }
+
+        allUsersDTO.setUsers(usersDTO);
+
+
+        return allUsersDTO;
+
+
     }
 
 //    @Override
@@ -86,24 +105,24 @@ public class UserServiceImpl implements UserService {
         return Optional.of(modelMapper.map(user,UserDTO.class));
     }
 
-//    @Override
-//    public AllUsersDTO getAllUsers() {
-//
-//        AllUsersDTO allUsersDTO =new AllUsersDTO();
-//
-//        List<UserEntity> all = userRepository.findAll();
-//        Set<UserDTO> userDTOS = new HashSet<>();
-//
-//        for (UserEntity userEntity : all) {
-//
-//            userDTOS.add(modelMapper.map(userEntity,UserDTO.class));
-//
-//        }
-//
-//        allUsersDTO.setUsers(userDTOS);
-//
-//        return allUsersDTO;
-//    }
+    @Override
+    public void makeAdmin(UserEntity user) {
+
+        Role role = this.roleService.findByRoleName(RolesEnum.ADMIN);
+
+        user.getRoles().add(role);
+
+        userRepository.save(user);
+
+    }
+
+
+
+    @Override
+    public Optional<UserEntity> getById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
 
     @Override
     public void register(UserRegisterDTO userRegisterDTO) {

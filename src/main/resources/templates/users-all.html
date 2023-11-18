@@ -1,22 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/head}">
 <body>
 <nav th:replace="~{/fragments/nav}"></nav>
 <main class="tickets-view-main">
 
-    <button id="loadAllUsers">Load all users</button>
-<table>
-    <thead>
 
-    <th > First Name:</th>
-    <th> Last Name: </th>
-    <th> Email: </th>
-    <th> Make Admin: </th>
+    <table th:object="${allUsersDTO}" >
+        <thead >
 
-    </thead>
-    <tbody id="users-table"></tbody>
-</table>
+        <td > ID:</td>
+
+        <td> First Name: </td>
+        <td> Last Name: </td>
+        <td> Action: </td>
+
+
+        </thead>
+        <tr th:each="user: ${allUsersDTO.getUsers()}">
+            <td th:text="${user.id}"> your data row row 2 column 1</td>
+
+            <td th:text="${user.firstName}"> your data row row 2 column 3</td>
+            <td th:text="${user.lastName}"> your data row row 2 column 3</td>
+            <td th:text="${user.email}"> your data row row 2 column 3</td>
+            <td  sec:authorize="hasRole('ADMIN')" >
+                <form th:action="@{grant-admin-role}"
+                th:method="post">
+                    <input type="hidden" th:name="userId" th:value="${user.id}">
+<!--                th:object="${userDto}">-->
+                <button class="td-details">
+
+                    Promote to admin
+                </button>
+                </form>  </td>
+
+        </tr>
+    </table>
 
     </main>
 

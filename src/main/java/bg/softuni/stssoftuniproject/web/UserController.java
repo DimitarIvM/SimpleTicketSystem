@@ -41,19 +41,8 @@ public class UserController {
 
     }
 
-    @GetMapping("/users/make-admin/{id}")
-    public ModelAndView getPromoteToAdmin(@PathVariable("id") Long id){
 
-        ModelAndView mv = new ModelAndView();
-
-        UserDTO userDto = new UserDTO();
-        userDto.setId(id);
-
-mv.addObject("userDto",userDto);
-
-        return mv;
-    }
-    @PostMapping("/grant-admin-role")
+    @PostMapping("/promote-admin-role")
     public String grantAdminRole(@RequestParam("userId") Long userId) {
        Optional <UserEntity> user =    userService.getById(userId);
 

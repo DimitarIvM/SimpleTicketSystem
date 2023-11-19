@@ -78,23 +78,6 @@ public class UserServiceImpl implements UserService {
 
     }
 
-//    @Override
-//    public UserDTO makeAdmin(Long id) {
-//
-//        UserEntity userEntity = userRepository.findById(id).get();
-//        List<Role> roles = this.roleService.findAll();
-//        Set<Role> rolseSet = new HashSet<>(roles);
-//
-//
-//
-//         userEntity.setRoles(rolseSet);
-//
-//
-//
-//        userRepository.save(userEntity);
-//
-//       return modelMapper.map(userEntity,UserDTO.class);
-//    }
 
     @Override
     public Optional<UserDTO> findById(Long id) {

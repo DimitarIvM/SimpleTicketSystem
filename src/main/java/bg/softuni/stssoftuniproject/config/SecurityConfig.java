@@ -32,7 +32,7 @@ public class SecurityConfig {
                                                  .permitAll()
 
                         .requestMatchers("/api/products-all",
-                                "/users/make-admin/{id}")
+                                "/promote-admin-role")
                                          .hasRole(RolesEnum.ADMIN.name())
                         .requestMatchers("/tickets/all",
                                 "/products/all",

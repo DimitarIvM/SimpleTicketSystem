@@ -21,4 +21,6 @@ public interface TicketService {
     Ticket findById(Long id);
 
     void saveAnswer(TicketAnswerDTO ticketAnswerDTO);
+
+    void deleteOldTickets();
 }

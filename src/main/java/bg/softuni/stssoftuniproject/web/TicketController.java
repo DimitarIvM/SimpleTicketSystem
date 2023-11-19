@@ -114,22 +114,8 @@ public ModelAndView viewTicketForEmployee(@PathVariable("id") Long id){
 
     }
 
-//    @PostMapping("/ticket/{id}")
-//    public ModelAndView postTicket(@PathVariable("id") Long ticketId){
-//
-//        ModelAndView mv = new ModelAndView();
-//
-//        mv.setViewName("ticket-view-user");
-//        TicketViewDTO  ticketViewDTO = ticketService.getTicketById(ticketId);
-//
-//
-//       this.ticketService.saveNotes(ticketViewDTO);
-//
-//        mv.setViewName("redirect:/ticket/{id}");
-//
-//        return mv;
-//
-//    }
+
+
 
     @ModelAttribute
     public TicketSubmitDTO ticketSubmitDTO(){

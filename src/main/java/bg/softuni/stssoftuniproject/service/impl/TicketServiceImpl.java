@@ -126,5 +126,20 @@ public class TicketServiceImpl implements TicketService {
 
     }
 
+    @Override
+    public void deleteOldTickets() {
+
+        List<Ticket> allTickets = this.ticketRepository.findAll();
+
+        for (Ticket ticket : allTickets) {
+            LocalDateTime now = LocalDateTime.now();
+            if (ticket.getModified().isBefore(now.minusDays(1))){
+                ticketRepository.delete(ticket);
+            }
+        }
+
+
+    }
+
 
 }

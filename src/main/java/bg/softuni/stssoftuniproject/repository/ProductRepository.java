@@ -11,4 +11,6 @@ public interface ProductRepository extends JpaRepository<Product,Long> {
     Set<Product> findAllBySerialNumber(String serialNumber);
 
     boolean existsBySerialNumber(String value);
+
+    Product findBySerialNumber(String testSN);
 }

@@ -42,12 +42,12 @@ public class UserController {
 
 
     @PostMapping("/promote-admin-role")
-    public String grantAdminRole(@RequestParam("userId") Long userId) {
+    public ModelAndView grantAdminRole(@RequestParam("userId") Long userId) {
        Optional <UserEntity> user =    userService.getById(userId);
 
        this.userService.makeAdmin(user.get());
 
-        return "redirect:/users/all";
+        return new ModelAndView("redirect:/users/all");
     }
 
 

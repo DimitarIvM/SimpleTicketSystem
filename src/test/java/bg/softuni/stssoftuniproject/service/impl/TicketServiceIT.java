@@ -42,7 +42,7 @@ public class TicketServiceIT {
     @Autowired
    private TicketService testService;
 
-    @MockBean
+    @Autowired
     private TicketRepository ticketRepository;
 
   @MockBean
@@ -62,9 +62,8 @@ public class TicketServiceIT {
 
         userRepository.save(user);
 
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-        when(auth.getName()).thenReturn("Test@Assignee.com");
+        when(userService.getLoggedUser()).thenReturn(user);
     }
       @Test
     void testSubmitTicket(){
@@ -73,9 +72,13 @@ public class TicketServiceIT {
           TicketSubmitDTO ticketSubmitDTO = ticketSubmitDTO();
           testService.submitTicket(ticketSubmitDTO);
 
-        Ticket saved = ticketRepository.findById(ticketSubmitDTO.getId()).get();
+          Optional<Ticket> byId = ticketRepository.findById(1L);
+          String subject = byId.get().getSubject();
 
-Assertions.assertNotNull(saved);
+          Assertions.assertTrue(ticketRepository.count()!=0);
+          Assertions.assertEquals(subject,"testSubkect");
+          Assertions.assertTrue(ticketRepository.existsById(1L));
+
 
 
 

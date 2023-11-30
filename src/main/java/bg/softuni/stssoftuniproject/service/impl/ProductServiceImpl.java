@@ -20,7 +20,7 @@ import java.util.Set;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
@@ -63,21 +63,5 @@ public class ProductServiceImpl implements ProductService {
         return Optional.of(modelMapper.map(product,ProductDTO.class));
     }
 
-//    @Override
-//    public AllProductsDTO getAllProducts() {
-//        AllProductsDTO allProductsDTO = new AllProductsDTO();
-//
-//        List<Product> all = this.productRepository.findAll();
-//
-//        Set<ProductDTO> productDTOS = new HashSet<>();
-//
-//        for (Product product : all) {
-//
-//            productDTOS.add(modelMapper.map(product, ProductDTO.class));
-//        }
-//
-//        allProductsDTO.setProducts(productDTOS);
-//
-//        return allProductsDTO;
-//    }
+
 }

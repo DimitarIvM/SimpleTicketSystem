@@ -1,6 +1,6 @@
 package bg.softuni.stssoftuniproject.config;
 
-import bg.softuni.stssoftuniproject.web.interceptor.LoggedAdminInterceptor;
+import bg.softuni.stssoftuniproject.utils.LoggedAdminInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

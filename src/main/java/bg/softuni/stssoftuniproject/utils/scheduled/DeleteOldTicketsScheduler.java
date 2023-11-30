@@ -1,4 +1,4 @@
-package bg.softuni.stssoftuniproject.web.scheduled;
+package bg.softuni.stssoftuniproject.utils.scheduled;
 
 import bg.softuni.stssoftuniproject.service.TicketService;
 import org.springframework.scheduling.annotation.Scheduled;

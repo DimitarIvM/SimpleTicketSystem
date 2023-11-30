@@ -1,13 +1,12 @@
 package bg.softuni.stssoftuniproject.web;
 
 import bg.softuni.stssoftuniproject.model.dto.AllUsersDTO;
-import bg.softuni.stssoftuniproject.model.dto.UserDTO;
+import bg.softuni.stssoftuniproject.model.dto.UserLoginDTO;
 import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 import bg.softuni.stssoftuniproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -54,9 +53,15 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public ModelAndView login() {
+    public ModelAndView login(@Valid UserLoginDTO userRegisterDTO,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
 
-        return new ModelAndView("login");
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("login");
+
+        mv.addObject("userLoginDTO",userRegisterDTO);
+        return mv;
 
     }
 
@@ -107,5 +112,11 @@ public class UserController {
     public UserRegisterDTO userRegisterDTO() {
 
         return new UserRegisterDTO();
+    }
+
+    @ModelAttribute
+    public UserLoginDTO userLoginDTO() {
+
+        return new UserLoginDTO();
     }
 }

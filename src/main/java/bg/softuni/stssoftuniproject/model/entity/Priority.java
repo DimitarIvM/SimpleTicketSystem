@@ -9,7 +9,7 @@ public class Priority  extends BaseEntity {
 @Column(nullable = false,unique = true)
 @Enumerated(EnumType.STRING)
     private PriorityEnum name;
-    @Column(columnDefinition = "TEXT")
+    @Column
     private String description;
 
 

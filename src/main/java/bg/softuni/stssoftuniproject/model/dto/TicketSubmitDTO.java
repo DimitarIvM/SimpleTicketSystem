@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class TicketSubmitDTO {
 
-
+private Long id;
     @NotNull
     private String subject;
 
@@ -57,5 +57,13 @@ public class TicketSubmitDTO {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -21,10 +21,10 @@ public class Ticket  extends BaseEntity{
     private UserEntity ticketAssignee;
 
 
-    @Column(columnDefinition = "LONGTEXT",nullable = false)
+    @Column(nullable = false)
     private String description;
 
-    @Column(columnDefinition = "LONGTEXT")
+    @Column()
     private String notes;
     @Column(nullable = false)
     private LocalDateTime created;

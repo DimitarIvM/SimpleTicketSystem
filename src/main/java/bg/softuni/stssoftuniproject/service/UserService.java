@@ -25,4 +25,6 @@ public interface UserService {
     void makeAdmin(UserEntity user);
 
     Optional<UserEntity> getById(Long userId);
+
+    Optional<UserEntity> findByUsername(String testUser);
 }

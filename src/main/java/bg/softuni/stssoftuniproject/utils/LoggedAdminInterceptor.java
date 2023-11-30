@@ -1,4 +1,4 @@
-package bg.softuni.stssoftuniproject.web.interceptor;
+package bg.softuni.stssoftuniproject.utils;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

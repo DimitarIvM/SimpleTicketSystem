@@ -1,52 +1,63 @@
 package bg.softuni.stssoftuniproject.web;
 
-import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
-import bg.softuni.stssoftuniproject.model.entity.Role;
-import bg.softuni.stssoftuniproject.model.entity.UserEntity;
-import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
-import bg.softuni.stssoftuniproject.repository.TicketRepository;
-import bg.softuni.stssoftuniproject.repository.UserRepository;
-import bg.softuni.stssoftuniproject.service.RoleService;
+import bg.softuni.stssoftuniproject.model.dto.*;
 import bg.softuni.stssoftuniproject.service.TicketService;
 import bg.softuni.stssoftuniproject.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import static org.mockito.Mockito.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@SpringBootTest
-@AutoConfigureMockMvc
 public class TicketControllerTestIT {
 
-    @Autowired
+    private TicketController ticketController;
+
+    @Mock
+    private TicketService ticketService;
+
+    @Mock
+    private UserService userService;
+
     private MockMvc mockMvc;
 
-    @Test
-    void testGetAll() throws Exception {
-
-        mockMvc.perform(
-                MockMvcRequestBuilders.get("/tickets/all")
-
-                        .with(csrf())
-
-        ).andExpect(status().is3xxRedirection());
-
+    @BeforeEach
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        ticketController = new TicketController(ticketService, userService);
+        mockMvc = MockMvcBuilders.standaloneSetup(ticketController).build();
     }
 
+    @Test
+    public void testGetAllTicketsForAdmin() throws Exception {
+        when(ticketService.getAllAvailableTickets()).thenReturn(new AllTicketsDTO());
 
+        mockMvc.perform(get("/tickets/all"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("all-tickets"))
+                .andExpect(model().attributeExists("allAvailableTicketsDTO"));
 
+        verify(ticketService, times(1)).getAllAvailableTickets();
+    }
 
+    @Test
+    public void testAnswerTicket() throws Exception {
+        Long ticketId = 1L;
+        TicketViewDTO ticketViewDTO = new TicketViewDTO();
+        when(ticketService.getTicketById(ticketId)).thenReturn(ticketViewDTO);
 
+        mockMvc.perform(get("/ticket/answer/{id}", ticketId))
+                .andExpect(status().isOk())
+                .andExpect(view().name("ticket-view-admin"))
+                .andExpect(model().attribute("ticketViewDTO", ticketViewDTO));
+
+        verify(ticketService, times(1)).getTicketById(ticketId);
+    }
 }
+
+

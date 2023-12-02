@@ -1,121 +1,119 @@
 package bg.softuni.stssoftuniproject.service.impl;
 
-import bg.softuni.stssoftuniproject.model.dto.TicketAnswerDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
-import bg.softuni.stssoftuniproject.model.entity.Role;
-import bg.softuni.stssoftuniproject.model.entity.Ticket;
-import bg.softuni.stssoftuniproject.model.entity.UserEntity;
-import bg.softuni.stssoftuniproject.model.enums.PriorityEnum;
-import bg.softuni.stssoftuniproject.model.enums.RolesEnum;
-import bg.softuni.stssoftuniproject.repository.RoleRepository;
+import bg.softuni.stssoftuniproject.model.dto.*;
+import bg.softuni.stssoftuniproject.model.entity.*;
 import bg.softuni.stssoftuniproject.repository.TicketRepository;
-import bg.softuni.stssoftuniproject.repository.UserRepository;
-import bg.softuni.stssoftuniproject.service.RoleService;
-import bg.softuni.stssoftuniproject.service.TicketService;
+import bg.softuni.stssoftuniproject.service.PriorityService;
+import bg.softuni.stssoftuniproject.service.ProductService;
 import bg.softuni.stssoftuniproject.service.UserService;
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.test.context.support.WithUserDetails;
+import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
-import static org.mockito.Mockito.when;
-import static org.springframework.security.test.context.support.TestExecutionEvent.TEST_METHOD;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
-@SpringBootTest
-@AutoConfigureMockMvc
 public class TicketServiceIT {
 
-    @Autowired
-   private TicketService testService;
+    private TicketServiceImpl ticketService;
 
-    @Autowired
+    @Mock
     private TicketRepository ticketRepository;
 
-  @MockBean
-  private static RoleService roleService;
+    @Mock
+    private PriorityService priorityService;
 
-      @MockBean
-     private UserService userService;
+    @Mock
+    private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
+    @Mock
+    private ProductService productService;
 
+    @Mock
+    private ModelMapper modelMapper;
 
     @BeforeEach
-    void setUp(){
-
-        UserEntity user = createTestUser();
-
-        userRepository.save(user);
-
-
-        when(userService.getLoggedUser()).thenReturn(user);
-    }
-      @Test
-    void testSubmitTicket(){
-
-
-          TicketSubmitDTO ticketSubmitDTO = ticketSubmitDTO();
-          testService.submitTicket(ticketSubmitDTO);
-
-          Optional<Ticket> byId = ticketRepository.findById(1L);
-          String subject = byId.get().getSubject();
-
-          Assertions.assertTrue(ticketRepository.count()!=0);
-          Assertions.assertEquals(subject,"testSubkect");
-          Assertions.assertTrue(ticketRepository.existsById(1L));
-
-
-
-
-
-
-      }
-
-      private TicketSubmitDTO ticketSubmitDTO(){
-
-          TicketSubmitDTO ticketSubmitDTO =new TicketSubmitDTO();
-
-          ticketSubmitDTO.setId(1L);
-          ticketSubmitDTO.setDescription("TestDEsc");
-          ticketSubmitDTO.setClient(userService.getLoggedUser().getEmail());
-          ticketSubmitDTO.setSubject("testSubkect");
-          ticketSubmitDTO.setCreated(LocalDateTime.now());
-                    return ticketSubmitDTO;
-      }
-
-    private static UserEntity createTestUser() {
-        UserEntity user = new UserEntity();
-        Role byRoleName = roleService.findByRoleName(RolesEnum.USER);
-
-
-        Set<Role> roles = new HashSet<>();
-        roles.add(byRoleName);
-        user.setEmail("Test@Assignee.com");
-        user.setFirstName("testFirstName");
-        user.setLastName("testLastName");
-        user.setPassword("testpass");
-        user.setRoles(roles);
-
-
-
-        return user;
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+        ticketService = new TicketServiceImpl(ticketRepository, priorityService, userService, productService, modelMapper);
     }
 
+    @Test
+    public void testSubmitTicket() {
+
+        TicketSubmitDTO ticketSubmitDTO = new TicketSubmitDTO();
+        ticketSubmitDTO.setSubject("Test Ticket");
+        ticketSubmitDTO.setDescription("Test Description");
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(1L);
+        when(userService.getLoggedUser()).thenReturn(userEntity);
+        when(modelMapper.map(ticketSubmitDTO, Ticket.class)).thenReturn(new Ticket());
+
+
+        ticketService.submitTicket(ticketSubmitDTO);
+
+
+        verify(ticketRepository, times(1)).save(any(Ticket.class));
+    }
+
+
+
+    @Test
+    public void testGetAllById() {
+
+        Long userId = 1L;
+        Set<Ticket> tickets = new HashSet<>();
+        tickets.add(new Ticket());
+        when(ticketRepository.findAllByClientId(userId)).thenReturn(tickets);
+        when(modelMapper.map(any(Ticket.class), eq(TicketDTO.class))).thenReturn(new TicketDTO());
+
+
+        AllTicketsDTO allTicketsDTO = ticketService.getAllById(userId);
+
+
+        assertNotNull(allTicketsDTO);
+        assertEquals(1, allTicketsDTO.getTickets().size());
+    }
+
+
+
+    @Test
+    public void testSaveAnswer() {
+
+        TicketAnswerDTO ticketAnswerDTO = new TicketAnswerDTO();
+        ticketAnswerDTO.setId(1L);
+        when(ticketRepository.findById(ticketAnswerDTO.getId())).thenReturn(Optional.of(new Ticket()));
+        when(productService.findAllBySerialNumber(anyString())).thenReturn(new HashSet<>());
+        when(userService.findByEmail(anyString())).thenReturn(new UserEntity());
+
+
+        ticketService.saveAnswer(ticketAnswerDTO);
+
+
+        verify(ticketRepository, times(1)).save(any(Ticket.class));
+    }
+
+    @Test
+    public void testDeleteOldTickets() {
+
+        List<Ticket> allTickets = Arrays.asList(new Ticket(), new Ticket());
+        LocalDateTime oneDayAgo = LocalDateTime.now().minusDays(1);
+        allTickets.get(0).setModified(oneDayAgo.minusMinutes(30));
+        allTickets.get(1).setModified(oneDayAgo.plusMinutes(30));
+        when(ticketRepository.findAll()).thenReturn(allTickets);
+
+
+        ticketService.deleteOldTickets();
+
+
+        verify(ticketRepository, times(1)).delete(allTickets.get(0));
+        verify(ticketRepository, never()).delete(allTickets.get(1));
+    }
 
 
 }

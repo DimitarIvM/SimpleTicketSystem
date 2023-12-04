@@ -1,12 +1,13 @@
 package bg.softuni.stssoftuniproject.web;
 
 import bg.softuni.stssoftuniproject.model.dto.AllUsersDTO;
-import bg.softuni.stssoftuniproject.model.dto.UserLoginDTO;
+
 import bg.softuni.stssoftuniproject.model.dto.UserRegisterDTO;
 import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 import bg.softuni.stssoftuniproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/all")
+        @GetMapping("/all")
     public ModelAndView getAllUsers() {
 
 
@@ -53,25 +54,16 @@ public class UserController {
 
 
     @GetMapping("/login")
-    public ModelAndView login(@Valid UserLoginDTO userRegisterDTO,
-                              BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes) {
+    public ModelAndView login() {
 
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("login");
 
-        mv.addObject("userLoginDTO",userRegisterDTO);
-        return mv;
+        return new ModelAndView("login");
 
     }
 
-    @PostMapping("/users/login-error")
-    public String onFailure(
-    ) {
 
 
-        return "login";
-    }
+
 
     @GetMapping("/register")
     public ModelAndView register() {
@@ -114,9 +106,5 @@ public class UserController {
         return new UserRegisterDTO();
     }
 
-    @ModelAttribute
-    public UserLoginDTO userLoginDTO() {
 
-        return new UserLoginDTO();
-    }
 }

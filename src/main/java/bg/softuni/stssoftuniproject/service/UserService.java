@@ -18,7 +18,7 @@ public interface UserService {
 
     AllUsersDTO getAllUsers();
 
-//    UserDTO makeAdmin(Long id);
+
 
     Optional<UserDTO> findById(Long id);
 
@@ -27,4 +27,6 @@ public interface UserService {
     Optional<UserEntity> getById(Long userId);
 
     Optional<UserEntity> findByUsername(String testUser);
+
+
 }

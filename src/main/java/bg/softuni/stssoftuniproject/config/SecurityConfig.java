@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
@@ -27,8 +28,7 @@ public class SecurityConfig {
                                 "/users/register",
                                 "/ticket-submit",
                                 "/users/login-error",
-                                "ticket/{id}",
-                                "/error")
+                                "ticket/{id}")
                                                  .permitAll()
 
                         .requestMatchers("/api/products-all",
@@ -44,10 +44,10 @@ public class SecurityConfig {
         ).formLogin(
                 formLogin ->{
                     formLogin.loginPage("/users/login")
+                            .failureUrl("/users/login?error")
                             .usernameParameter("email")
                             .passwordParameter("password")
-                            .defaultSuccessUrl("/")
-                            .failureForwardUrl("/users/login-error");
+                            .defaultSuccessUrl("/");
                 }
         ).logout(
                 logout ->{
@@ -58,6 +58,8 @@ public class SecurityConfig {
                 }
         ).build();
     }
+
+
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
 

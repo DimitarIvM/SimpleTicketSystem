@@ -341,3 +341,8 @@ body > main > form > div.button-holder.d-flex.justify-content-center {
     padding: 5px;
 
 }
+
+/*.alert alert-error text-danger{*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*justify-content: center}*/

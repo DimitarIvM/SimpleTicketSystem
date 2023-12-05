@@ -14,6 +14,12 @@ public interface TicketRepository extends JpaRepository<Ticket,Long> {
 
     Set<Ticket> findAllByClientId(Long id);
 
-
-
+@Query(value = "select  t.subject " +
+        "from `tickets` t " +
+        "join `tickets_products`  " +
+        "tp on t.id=tp.ticket_id " +
+        "join `products` p " +
+        "on tp.product_id=p.id " +
+        "where p.serial_number=:serialNumber",nativeQuery = true)
+    List<Object[]> findAllByProductSerialNumber(String serialNumber);
 }

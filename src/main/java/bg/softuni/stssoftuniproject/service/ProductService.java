@@ -17,7 +17,6 @@ public interface ProductService {
 
     void save(AddProductDTO addProductDTO);
 
-//    AllProductsDTO getAllProducts();
 
     List<ProductDTO> getAllProducts();
 

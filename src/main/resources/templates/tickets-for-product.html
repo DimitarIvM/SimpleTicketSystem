@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/head}">
+<body>
+
+<nav th:replace="~{fragments/nav}"></nav>
+
+
+<main class="tickets-view-main">
+  <input id="searchBy" type="text">
+  <button id="loadTickets">Search</button>
+  <table>
+    <thead>
+
+    <th > Subject:</th>
+
+
+
+
+    </thead>
+    <tbody id="tickets-table"></tbody>
+  </table>
+
+
+</main>
+<script src="/js/ticket-search.js"></script>
+
+<footer th:fragment="footer" class="footer">
+
+  <div class="footer-logo">
+    <a href="/static"> Simple Ticket System</a></div>
+
+  <div class="social"> Follow us on
+    <ul >
+      <li><i class="fab fa-instagram"></i></li>
+      <li><i class="fab fa-facebook-f"></i></li>
+      <li><i class="fab fa-twitter"></i></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

@@ -14,9 +14,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -140,6 +138,31 @@ public class TicketServiceImpl implements TicketService {
 
 
     }
+
+
+//    public List<TicketDTO> findTicketsForProduct(String serialNumber) {
+//
+//        List<TicketDTO> ticketDTOList= new ArrayList<>();
+//
+//        List<Ticket> tickets = ticketRepository.findAllByProductSerialNumber(serialNumber);
+//
+//        for (Ticket ticket1 : tickets) {
+//
+//
+//            ticketDTOList.add( modelMapper.map(ticket1,TicketDTO.class));
+//
+//        }
+//
+//        return ticketDTOList;
+//
+//    }
+    @Override
+    public List<Object[]> findTicketsForProduct(String serialNumber) {
+        return ticketRepository.findAllByProductSerialNumber(serialNumber)
+                .stream()
+                .toList();
+    }
+
 
 
 }

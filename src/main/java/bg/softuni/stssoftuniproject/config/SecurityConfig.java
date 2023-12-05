@@ -28,7 +28,8 @@ public class SecurityConfig {
                                 "/users/register",
                                 "/ticket-submit",
                                 "/users/login-error",
-                                "ticket/{id}")
+                                "ticket/{id}",
+                        "/error")
                                                  .permitAll()
 
                         .requestMatchers("/api/products-all",
@@ -38,7 +39,10 @@ public class SecurityConfig {
                                 "/products/all",
                                 "/products/add",
                                 "/ticket/answer/{id}",
-                                "/users/all")
+                                "/users/all",
+                                "/tickets-for-product",
+                                "/api/tickets"
+                                )
                                                     .hasRole(RolesEnum.ADMIN.name())
                         .anyRequest().authenticated()
         ).formLogin(

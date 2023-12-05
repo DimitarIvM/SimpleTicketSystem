@@ -1,5 +1,6 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -36,8 +37,8 @@ public class Product  extends BaseEntity {
     public void setTickets(Set<Ticket> tickets) {
         this.tickets = tickets;
     }
-
-    @ManyToMany(mappedBy = "products")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "products",fetch = FetchType.EAGER)
     private Set<Ticket>
             tickets;
 

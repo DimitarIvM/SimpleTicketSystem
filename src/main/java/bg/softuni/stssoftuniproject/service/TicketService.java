@@ -1,10 +1,9 @@
 package bg.softuni.stssoftuniproject.service;
 
-import bg.softuni.stssoftuniproject.model.dto.AllTicketsDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketAnswerDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketSubmitDTO;
-import bg.softuni.stssoftuniproject.model.dto.TicketViewDTO;
+import bg.softuni.stssoftuniproject.model.dto.*;
 import bg.softuni.stssoftuniproject.model.entity.Ticket;
+
+import java.util.List;
 
 public interface TicketService {
     void submitTicket(TicketSubmitDTO ticketSubmitDTO);
@@ -23,4 +22,8 @@ public interface TicketService {
     void saveAnswer(TicketAnswerDTO ticketAnswerDTO);
 
     void deleteOldTickets();
+
+    List<Object[]> findTicketsForProduct(String serialNumber);
+
+
 }

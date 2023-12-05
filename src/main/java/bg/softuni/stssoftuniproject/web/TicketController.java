@@ -21,6 +21,13 @@ public class TicketController {
         this.userService = userService;
     }
 
+    @GetMapping("/tickets-for-product")
+    public ModelAndView getTicketsForProduct(){
+      return new ModelAndView("tickets-for-product");
+
+
+    }
+
     @GetMapping("/tickets/all")
     public ModelAndView getAllTicketsForAdmin(){
         ModelAndView mv = new ModelAndView();

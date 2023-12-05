@@ -20,8 +20,8 @@ function loadProductsHandler(){
 
 
                 productName.textContent=product.productName;
-            serialNumber.textContent=product.partNumber;
-            partNumber.textContent=product.lastName;
+            serialNumber.textContent=product.serialNumber;
+            partNumber.textContent=product.partNumber;
 
 
 

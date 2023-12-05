@@ -1,5 +1,6 @@
 package bg.softuni.stssoftuniproject.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,11 +13,11 @@ public class Ticket  extends BaseEntity{
 
     @Column(nullable = false)
     private String subject;
-
+    @JsonIgnore
     @ManyToOne
     @NotNull
     private UserEntity client;
-
+    @JsonIgnore
     @ManyToOne
     private UserEntity ticketAssignee;
 

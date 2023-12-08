@@ -18,7 +18,7 @@ public class LoggedAdminInterceptor implements HandlerInterceptor {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null && auth.isAuthenticated()) {
             String username = auth.getName();
-            System.out.println("User " + username + " is accessing: " + request.getRequestURI());
+            System.out.println("Username " + username + " using " + request.getRequestURI());
         }
 
         return true;

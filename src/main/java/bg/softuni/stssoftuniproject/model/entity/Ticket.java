@@ -32,7 +32,7 @@ public class Ticket  extends BaseEntity{
 
     @Column
     private LocalDateTime  modified;
-    @OneToOne
+    @ManyToOne
     private Priority priority;
 
     @ManyToMany(targetEntity = Product.class,fetch = FetchType.EAGER)

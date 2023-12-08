@@ -11,6 +11,7 @@ import bg.softuni.stssoftuniproject.service.ProductService;
 import bg.softuni.stssoftuniproject.service.TicketService;
 import bg.softuni.stssoftuniproject.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -112,7 +113,9 @@ public class TicketServiceImpl implements TicketService {
         Priority priority = this.priorityService.findByName(ticketAnswerDTO.getPriority());
 
         Set<Product> products = this.productService.findAllBySerialNumber(ticketAnswerDTO.getProduct());
-        UserEntity assignee = this.userService.findByEmail(ticketAnswerDTO.getAssignee());
+        UserEntity assignee = this.userService.getLoggedUser();
+
+        ticketEntity.setPriority(null);
 
         ticketEntity.setNotes(ticketAnswerDTO.getNotes());
         ticketEntity.setModified(LocalDateTime.now());
@@ -131,7 +134,7 @@ public class TicketServiceImpl implements TicketService {
 
         for (Ticket ticket : allTickets) {
             LocalDateTime now = LocalDateTime.now();
-            if (ticket.getModified().isBefore(now.minusDays(1))){
+            if (ticket.getModified().isBefore(now.minusDays(100))){
                 ticketRepository.delete(ticket);
             }
         }
@@ -139,29 +142,13 @@ public class TicketServiceImpl implements TicketService {
 
     }
 
-
-//    public List<TicketDTO> findTicketsForProduct(String serialNumber) {
-//
-//        List<TicketDTO> ticketDTOList= new ArrayList<>();
-//
-//        List<Ticket> tickets = ticketRepository.findAllByProductSerialNumber(serialNumber);
-//
-//        for (Ticket ticket1 : tickets) {
-//
-//
-//            ticketDTOList.add( modelMapper.map(ticket1,TicketDTO.class));
-//
-//        }
-//
-//        return ticketDTOList;
-//
-//    }
     @Override
     public List<Object[]> findTicketsForProduct(String serialNumber) {
         return ticketRepository.findAllByProductSerialNumber(serialNumber)
                 .stream()
                 .toList();
     }
+
 
 
 

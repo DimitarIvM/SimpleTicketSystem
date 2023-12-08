@@ -3,12 +3,12 @@ package bg.softuni.stssoftuniproject.web;
 import bg.softuni.stssoftuniproject.model.dto.*;
 import bg.softuni.stssoftuniproject.service.TicketService;
 import bg.softuni.stssoftuniproject.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class TicketController {
@@ -59,7 +59,7 @@ public class TicketController {
         return mv;
     }
 
-    @PostMapping("/ticket/answer/{id}")
+    @PatchMapping ("/ticket/answer/{id}")
     public ModelAndView postAnswerTicket(@PathVariable("id") Long id, TicketAnswerDTO ticketAnswerDTO){
 
         ModelAndView mv = new ModelAndView();
@@ -96,7 +96,17 @@ mv.setViewName("tickets");
     }
 
     @PostMapping("/ticket-submit")
-    public ModelAndView submitTicket(TicketSubmitDTO ticketSubmitDTO){
+    public ModelAndView submitTicket(@Valid TicketSubmitDTO ticketSubmitDTO,
+                                     RedirectAttributes redirectAttributes,
+                                     BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+
+            redirectAttributes.addFlashAttribute("ticketSubmitDTO",ticketSubmitDTO)
+                    .addFlashAttribute("org.springframework.validation.BindingResult.ticketSubmitDTO",bindingResult);
+
+            return new ModelAndView("redirect:/ticket-submit");
+        }
 
         this.ticketService.submitTicket(ticketSubmitDTO);
 

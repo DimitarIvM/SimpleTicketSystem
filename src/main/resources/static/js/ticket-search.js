@@ -15,24 +15,24 @@ function searchTickets(){
         .then(response => response.json())
         .then(data  => {
 
-            let row = document.createElement('tr');
-            let subject = document.createElement('td');
-            let client = document.createElement('td');
+          data.forEach( subject =>{
 
 
 
-            subject.textContent = data[0];
+                  let row = document.createElement('tr');
+                  let sub = document.createElement('td');
 
+                  sub.innerHTML =subject;
 
-
-
-
-            row.appendChild(subject);
+                  row.appendChild(sub);
 
 
 
 
-            tbodyElement.appendChild(row);
+                  tbodyElement.appendChild(row);
+          });
+
+
 
         }).catch(error => {
             console.error("error fetching data: ",error)

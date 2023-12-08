@@ -112,6 +112,9 @@ i{
 
 
 }
+.social > ul > li:nth-child(1){
+    color: black;
+}
 
 ul{
     list-style-type: none;

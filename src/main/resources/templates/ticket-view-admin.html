@@ -37,7 +37,7 @@
   </div>
 
   <form class="form-submit-ticket"
-        th:method="post"
+        th:method="patch"
         th:action="@{/ticket/answer/{id} (id=${ticketViewDTO.id})}" th:object="${ticketAnswerDTO}">
     <label for="notes" >Notes </label>
     <textarea th:modelAttribute="notes" th:field="${ticketAnswerDTO.notes}" name="notes" id="notes" ></textarea>
@@ -56,13 +56,14 @@
       </select>
 
 
-    <label for="assignee">Assign to:</label>
-    <input class="form-control" type="text" name="assignee" id="assignee">
+      <label for="product">Product:</label>
+      <input th:field="*{product}" th:errorclass="'is-invalid alert-danger'"
+             type="text" class="form-control" id="product" name="product"/>
+      <small th:errors="*{product}"
+             th:if="${#fields.hasErrors('assignee')}" class="invalid-feedback text-danger">First name error message</small>
 
-    <label for="product">Product:</label>
-    <input class="form-control" type="text" name="product" id="product">
 
-    <button class="main-button" type="submit">Save</button>
+      <button class="main-button" type="submit">Save</button>
     </div>
   </form>
 </main>

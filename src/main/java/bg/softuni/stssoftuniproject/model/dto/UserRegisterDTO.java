@@ -8,8 +8,10 @@ import jakarta.validation.constraints.Size;
 public class UserRegisterDTO {
 
     @NotNull
+    @Size(min = 2,message = "First name must contain at least 2 symbols")
     private String firstName;
     @NotNull
+    @Size(min = 2,message = "Last name must contain at least 2 symbols")
     private String lastName;
 
     @Email

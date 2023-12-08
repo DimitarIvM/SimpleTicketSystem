@@ -4,6 +4,7 @@ import bg.softuni.stssoftuniproject.model.entity.Priority;
 import bg.softuni.stssoftuniproject.model.entity.Product;
 import bg.softuni.stssoftuniproject.model.entity.UserEntity;
 import bg.softuni.stssoftuniproject.model.enums.PriorityEnum;
+import bg.softuni.stssoftuniproject.validation.anotations.AssigneeExists;
 import bg.softuni.stssoftuniproject.validation.anotations.ProductExists;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -20,8 +21,9 @@ public class TicketAnswerDTO {
         this.id = id;
     }
 
-    @NotNull
+    @NotNull()
     @Email
+    @AssigneeExists(message = "Please use an existing admin e-mail.")
     private String assignee;
 
     @NotNull

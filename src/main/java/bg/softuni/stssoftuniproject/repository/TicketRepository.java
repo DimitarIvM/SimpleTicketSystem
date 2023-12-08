@@ -22,4 +22,7 @@ public interface TicketRepository extends JpaRepository<Ticket,Long> {
         "on tp.product_id=p.id " +
         "where p.serial_number=:serialNumber",nativeQuery = true)
     List<Object[]> findAllByProductSerialNumber(String serialNumber);
+
+    List<Ticket> findAllByOrderByIdAsc();
+    List<Ticket> findAll();
 }

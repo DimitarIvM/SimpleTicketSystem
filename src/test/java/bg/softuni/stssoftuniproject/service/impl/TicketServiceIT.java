@@ -102,8 +102,8 @@ public class TicketServiceIT {
     public void testDeleteOldTickets() {
 
         List<Ticket> allTickets = Arrays.asList(new Ticket(), new Ticket());
-        LocalDateTime oneDayAgo = LocalDateTime.now().minusDays(1);
-        allTickets.get(0).setModified(oneDayAgo.minusMinutes(30));
+        LocalDateTime oneDayAgo = LocalDateTime.now().minusDays(100);
+        allTickets.get(0).setModified(oneDayAgo.minusMinutes(101));
         allTickets.get(1).setModified(oneDayAgo.plusMinutes(30));
         when(ticketRepository.findAll()).thenReturn(allTickets);
 

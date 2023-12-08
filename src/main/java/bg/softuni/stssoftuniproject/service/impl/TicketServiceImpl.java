@@ -86,9 +86,9 @@ public class TicketServiceImpl implements TicketService {
 
         AllTicketsDTO allTicketsDTO = new AllTicketsDTO();
 
-        List<Ticket> all = this.ticketRepository.findAll();
+        List<Ticket> all = this.ticketRepository.findAllByOrderByIdAsc();
 
-        Set<TicketDTO> allTickets = new HashSet<>();
+        Set<TicketDTO> allTickets = new LinkedHashSet<>();
 
         for (Ticket ticket : all) {
 

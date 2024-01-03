@@ -11,7 +11,7 @@ import bg.softuni.stssoftuniproject.service.ProductService;
 import bg.softuni.stssoftuniproject.service.TicketService;
 import bg.softuni.stssoftuniproject.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -114,8 +114,6 @@ public class TicketServiceImpl implements TicketService {
 
         Set<Product> products = this.productService.findAllBySerialNumber(ticketAnswerDTO.getProduct());
         UserEntity assignee = this.userService.getLoggedUser();
-
-        ticketEntity.setPriority(null);
 
         ticketEntity.setNotes(ticketAnswerDTO.getNotes());
         ticketEntity.setModified(LocalDateTime.now());
